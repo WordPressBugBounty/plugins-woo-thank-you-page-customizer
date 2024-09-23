@@ -1,0 +1,1157 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Thank You Page Customizer for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-24 03:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.2.0; wp-5.1"
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:174
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:191
+msgid "Add items"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2934
+msgid "Address"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1989
+msgid "Address Background Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1972
+msgid "Address Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1936
+msgid "Address Font Size(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1952
+msgid "Address Text Align"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:577
+msgid "Allow free shipping"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:261
+msgid "Available components"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:870
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1041
+msgid "Available shortcode"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:635
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1413
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1706
+msgid "Background Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:854
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1024
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1718
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:460
+msgid "Billing address"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:857
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1027
+msgid "Billing city"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:856
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1026
+msgid "Billing country"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:862
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1032
+msgid "Billing email"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:859
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1029
+msgid "Billing first name"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:860
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1030
+msgid "Billing last name"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2814
+msgid "Blue"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2818
+msgid "Blue dot"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2822
+msgid "Blue pushpin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:717
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1299
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1495
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1788
+msgid "Border Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:698
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1280
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1476
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1769
+msgid "Border Style"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:682
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1264
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1460
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1753
+msgid "Border Width(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1072
+msgid "Cancel"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:697
+msgid "Categories"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:864
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:932
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1000
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1081
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1185
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1593
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1886
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1955
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2182
+msgid "Center"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:228
+msgid "Click on items below to add row"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1063
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1231
+msgid "Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1631
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:896
+msgid "Copy code"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1169
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:403
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:86
+msgid "Coupon"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:567
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:838
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1008
+msgid "Coupon amount"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:834
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1004
+msgid "Coupon code"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1334
+msgid "Coupon Code Background Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1317
+msgid "Coupon Code Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:969
+msgid "Coupon code is copied to clipboard."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:558
+msgid "Coupon code prefix"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:835
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1005
+msgid "Coupon code style 1"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:155
+msgid "Coupon code was sent to your billing email."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:137
+msgid ""
+"Coupon code was sent to your billing email. If you did not receive any email,"
+" please go to Account settings/Orders to view your coupon gift anytime."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/account.php:78
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/account.php:81
+msgid "Coupon gift"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:836
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1006
+msgid "Coupon's date expires"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:837
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1007
+msgid "Coupon's last valid date"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Craft a stunning thank you page effortlessly with our user-friendly "
+"customization tools, offer coupons to customers after purchase."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:608
+msgid "Custom CSS"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1669
+msgid "Customer Information"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1705
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:85
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:447
+msgid "Customer information"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:702
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:752
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:802
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1284
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1480
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1531
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1773
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1824
+msgid "Dashed"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1986
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:178
+msgid "Date"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2908
+msgid "Default"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:475
+msgid "Design"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:545
+msgid "Discount type"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1643
+msgid "Display Product Image"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:701
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:751
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:801
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1283
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1479
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1530
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1772
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1823
+msgid "Dotted"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2460
+msgid "Dribbble URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1421
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1526
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1610
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1648
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1677
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1698
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1779
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1948
+msgid "Edit"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:161
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:272
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:290
+msgid "Edit this item"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:405
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:2021
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:213
+msgid "Email"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:815
+msgid "Email content"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:805
+msgid "Email heading"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1629
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:894
+msgid "Email me"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:512
+msgid "Email restriction"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:795
+msgid "Email subject"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:411
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:418
+msgid "Enable"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:636
+msgid "Enable if the coupon cannot be used in conjunction with other coupons."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:650
+msgid ""
+"Enable if the coupon should not apply to items on sale. Per-item coupons "
+"will only work if the item is not on sale. Per-cart coupons will only work "
+"if there are items in the cart that are not on sale."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:520
+msgid "Enable to make coupon usable for received email only"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:720
+msgid "Exclude categories"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:677
+msgid "Exclude products"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:642
+msgid "Exclude sale items"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:506
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:526
+msgid "Existing coupon"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:592
+msgid "Expires after(days)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2254
+msgid "Facebook URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:550
+msgid "Fixed cart discount"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:551
+msgid "Fixed product discount"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:594
+msgid "Follow Dribbble"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:543
+msgid "Follow Facebook"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:620
+msgid "Follow Google Plus"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:581
+msgid "Follow Instagram"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:646
+msgid "Follow Linkedin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:568
+msgid "Follow Pinterest"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:607
+msgid "Follow Tumblr"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:555
+msgid "Follow Twitter"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:633
+msgid "Follow VK"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:660
+msgid "Follow Youtube"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:855
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1025
+msgid "Formatted billing address"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:861
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1031
+msgid "Formatted billing full name"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:852
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1022
+msgid "Formatted shipping address"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:586
+msgid "free shipping method"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:401
+msgid "General"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:488
+msgid "Go to design"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2761
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:88
+msgid "Google map"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:466
+msgid "Google map API key"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2562
+msgid "Google Plus ID"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2841
+msgid "Green"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2845
+msgid "Green dot"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2849
+msgid "Green pushpin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:898
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1627
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1920
+msgid "Header Background Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:881
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1610
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1903
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2131
+msgid "Header Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:845
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1125
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1574
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1867
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2146
+msgid "Header Font Size(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:832
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1112
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1561
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1854
+msgid "Header Text"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:861
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1590
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1883
+msgid "Header Text Align"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2791
+msgid "Height(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:840
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1010
+msgid "Home url"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:817
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1546
+msgid "Horizontal Separator Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:798
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1527
+msgid "Horizontal Separator Style"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:782
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1511
+msgid "Horizontal Separator Width(px)"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://villatheme.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://villatheme.com/extensions/woo-thank-you-page-customizer"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2290
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2342
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2393
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2444
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2495
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2546
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2597
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2648
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2698
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2748
+msgid "Icon Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2179
+msgid "Icons align"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2163
+msgid "Icons size (px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1369
+msgid ""
+"If enabled, when hovering the coupon field, 2 buttons will show to copy "
+"coupon code or send code to billing email."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2775
+msgid "If set 0, width will be 100%."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:628
+msgid "Individual use only"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2409
+msgid "Instagram URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:847
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1017
+msgid "Items count"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:866
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:934
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1002
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1083
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1187
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1595
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1888
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1957
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2184
+msgid "Justify"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:863
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:931
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:999
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1080
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1184
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1592
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1885
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1954
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2181
+msgid "Left"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:754
+msgid "Limit usage to X items"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2683
+msgid "Linkedin URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2918
+msgid "Marker"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2950
+msgid "Marker label"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:615
+msgid "Maximum spend"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1154
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1247
+msgid "Message Font Size(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1141
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1216
+msgid "Message Text"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:604
+msgid "Minimum spend"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1365
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:82
+msgid "My account"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1723
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1748
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:465
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:490
+msgid "N/A"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/account.php:39
+msgid "Never"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:150
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1578
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1592
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:853
+msgid "never expires"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1923
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:420
+msgid "Note"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1071
+msgid "OK"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2216
+msgid "Open link in current tab"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2215
+msgid "Open link in new tab"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2855
+msgid "Orange"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2859
+msgid "Orange dot"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:89
+msgid "Order again"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:619
+msgid "Order Confirmation"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1957
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:83
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:149
+msgid "Order confirmation"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:844
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1014
+msgid "Order date"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1380
+msgid "Order Details"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1788
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:84
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:274
+msgid "Order details"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:842
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1012
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1968
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:160
+msgid "Order number"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:440
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:843
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1013
+msgid "Order status"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:846
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1016
+msgid "Order subtotal"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:845
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1015
+msgid "Order total"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:650
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1096
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1200
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1428
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1721
+msgid "Padding(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1362
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:79
+msgid "Pay"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:848
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1018
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:2040
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:91
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:232
+msgid "Payment method"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:549
+msgid "Percentage discount"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2865
+msgid "Pink"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2869
+msgid "Pink dot"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2873
+msgid "Pink pushpin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2358
+msgid "Pinterest URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:67
+msgid "Preview emails"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1800
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:286
+msgid "Product"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1655
+msgid "Product Image width(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:658
+msgid "Products"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2879
+msgid "Purple"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2883
+msgid "Purple dot"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2887
+msgid "Purple pushpin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2893
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2897
+msgid "Red"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2901
+msgid "Red pushpin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:220
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:357
+msgid "Remove"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:163
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:274
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:292
+msgid "Remove this item"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:865
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:933
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1001
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1082
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1186
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1594
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1887
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1956
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2183
+msgid "Right"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:666
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1444
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1737
+msgid "Rounded Corner(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1352
+msgid "Scissors color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:500
+msgid "Select coupon"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:557
+msgid "Select order to preview"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:783
+msgid "Send coupon email"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:790
+msgid "Send coupon email if coupon is given on thank you page"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:155
+msgid "Settings"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:851
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1021
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1743
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:485
+msgid "Shipping address"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:850
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1020
+msgid "Shipping method"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:839
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1009
+msgid "Shop title"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:841
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1011
+msgid "Shop url"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:64
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:235
+msgid "Shortcodes"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1368
+msgid "Show button to handle coupon code"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:424
+msgid "Show coupon gift"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:434
+msgid "Show coupon gift on the My Account > Orders page"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:87
+msgid "Social icons"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2034
+msgid "Social Media"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:700
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:750
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:800
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1282
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1478
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1529
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1771
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1822
+msgid "Solid"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2197
+msgid "Spaces Between Icons (px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1078
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1182
+msgid "Text Align"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1396
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1689
+msgid "Text Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:90
+msgid "Text editor"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2116
+msgid "Text Follow Social Network"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1048
+msgid "Thank You Message"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/includes/custom-controls.php:82
+msgid "Thank you message"
+msgstr ""
+
+#. Name of the plugin
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:390
+msgid "Thank You Page Customizer for WooCommerce"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1382
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:957
+msgid "Thank you. Your order has been received."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:133
+msgid ""
+"There was problem sending email but you can always view your coupon gift by "
+"going to Account settings/Orders"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:966
+msgid "Title Background Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:949
+msgid "Title Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:913
+msgid "Title Font Size(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:929
+msgid "Title Text Align"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1806
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:2003
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:195
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:292
+msgid "Total"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2511
+msgid "Tumblr URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2307
+msgid "Twitter URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/frontend/frontend.php:1358
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/templates/thankyou.php:75
+msgid ""
+"Unfortunately your order cannot be processed as the originating "
+"bank/merchant has declined your transaction. Please attempt your purchase "
+"again."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:505
+msgid "Unique coupon"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:743
+msgid "Usage limit per coupon"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:765
+msgid "Usage limit per user"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2951
+msgid "Use {address} to refer to the address that you enter above."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/settings.php:460
+msgid ""
+"Usually, order status will be set to \"Processing\" after checking out and "
+"customers will be lead to a thank you page but it could be different for "
+"some payments that you are using."
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1034
+msgid "Value Background Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1017
+msgid "Value Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:981
+msgid "Value Font Size(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:997
+msgid "Value Text Align"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:767
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1839
+msgid "Vertical Separator Color"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:748
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1820
+msgid "Vertical Separator Style"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:732
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:1804
+msgid "Vertical Separator Width(px)"
+msgstr ""
+
+#. Author of the plugin
+msgid "VillaTheme"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2613
+msgid "VKontakte URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2213
+msgid "When click on social icons"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2774
+msgid "Width(px)"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:480
+msgid "WooCommerce Thank You Page"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2827
+msgid "Yellow"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2831
+msgid "Yellow dot"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2835
+msgid "Yellow pushpin"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2461
+msgid "Your Dribbble URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2255
+msgid "Your Facebook URL Eg: https://www.facebook.com/villatheme"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2563
+msgid "Your Google Plus URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2410
+msgid "Your Instagram URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2684
+msgid "Your Linkedin URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2359
+msgid "Your Pinterest URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2512
+msgid "Your Tumblr URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2308
+msgid "Your Twitter URL Eg: https://www.twitter.com/villatheme"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2614
+msgid "Your VKontakte URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2734
+msgid ""
+"Your Youtube URL. Eg: https://www.youtube."
+"com/channel/UCbCfnjbtBZIQfzLvXgNpbKw"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2733
+msgid "Youtube URL"
+msgstr ""
+
+#: D:/git-2024/free-version/woo-thank-you-page-customizer/woo-thank-you-page-customizer/admin/design.php:2964
+msgid "Zoom level"
+msgstr ""
