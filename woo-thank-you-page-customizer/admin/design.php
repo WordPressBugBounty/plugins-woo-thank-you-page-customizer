@@ -59,11 +59,12 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 	public function get_available_shortcodes() {
 		$order_id = isset( $_POST['order_id'] ) ? sanitize_text_field( $_POST['order_id'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$order    = wc_get_order( $order_id );
+		$date_format = wc_date_format();
 		if ( $order ) {
 			$shortcodes    = array(
 				'order_number'   => $order_id,
 				'order_status'   => $order->get_status(),
-				'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n( 'F d, Y' ) : '',
+				'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n( $date_format ) : '',
 				'order_total'    => $order->get_formatted_order_total(),
 				'order_subtotal' => $order->get_subtotal_to_display(),
 				'items_count'    => $order->get_item_count(),
@@ -263,10 +264,11 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 		), VI_WOO_THANK_YOU_PAGE_VERSION, true );
 		$order              = wc_get_order( $this->order_id );
 		$google_map_address = $this->get_params( 'google_map_address' );
+		$date_format = wc_date_format();
 		if ( $order ) {
 			$this->shortcodes['order_number']   = $this->order_id;
 			$this->shortcodes['order_status']   = $order->get_status();
-			$this->shortcodes['order_date']     = $order->get_date_created() ? $order->get_date_created()->date_i18n() : '';
+			$this->shortcodes['order_date']     = $order->get_date_created() ? $order->get_date_created()->date_i18n( $date_format ) : '';
 			$this->shortcodes['order_total']    = $order->get_formatted_order_total();
 			$this->shortcodes['order_subtotal'] = $order->get_subtotal_to_display();
 			$this->shortcodes['items_count']    = $order->get_item_count();
@@ -479,19 +481,24 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'theme_supports' => '',
 			'title'          => esc_html__( 'WooCommerce Thank You Page', 'woo-thank-you-page-customizer' ),
 		) );
-		$default_order_id = '';
-
+		$default_order_id = $this->get_params( 'select_order' );
+		$select_orders = array();
+		$order_status  = array_keys( wc_get_order_statuses() );
+		if ( $default_order_id ) {
+			$select_order = wc_get_order( $default_order_id );
+			if ( $select_order && in_array( 'wc-' . $select_order->get_status(), $order_status ) ) {
+				$select_orders[ $default_order_id ] = sprintf( esc_html( 'Order #%s' ), $default_order_id );
+			} else {
+				$default_order_id = '';
+			}
+		}
 		$args          = array(
-			'status' => array_keys( wc_get_order_statuses() ),
+			'status' => $order_status,
 			'limit'  => 20,
 			'order'  => 'DESC',
 			'return' => 'ids',
 		);
 		$orders        = wc_get_orders( $args );
-		$select_orders = array();
-		if ( $this->get_params( 'select_order' ) ) {
-			$select_orders[ $this->get_params( 'select_order' ) ] = sprintf( esc_html( 'Order #%s' ), $this->get_params( 'select_order' ) );
-		}
 		if ( ! empty( $orders ) ) {
 			foreach ( $orders as $order ) {
 				$default_order_id        = $default_order_id ?: $order;
@@ -2041,6 +2048,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			"wtyp_social_icons-facebook-app-logo",
 			"wtyp_social_icons-facebook-logo",
 			"wtyp_social_icons-internet",
+			"wtyp_social_icons-twitter-new",
 			"wtyp_social_icons-twitter-logo-button",
 			"wtyp_social_icons-twitter-logo-silhouette",
 			"wtyp_social_icons-twitter",

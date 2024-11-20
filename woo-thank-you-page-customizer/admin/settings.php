@@ -71,10 +71,11 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public function preview_emails_ajax() {
+		$date_format = wc_date_format();
 		$shortcodes          = array(
 			'order_number'   => 2019,
 			'order_status'   => 'processing',
-			'order_date'     => date_i18n( 'F d, Y', strtotime( 'today' ) ),
+			'order_date'     => date_i18n( $date_format, strtotime( 'today' ) ),
 			'order_total'    => 999,
 			'order_subtotal' => 990,
 			'items_count'    => 3,
@@ -103,8 +104,8 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 		$heading             = isset( $_GET['heading'] ) ? sanitize_text_field( stripslashes( $_GET['heading'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$coupon_amount       = '10%';
 		$coupon_code         = 'HAPPY';
-		$coupon_date_expires = date_i18n( 'F d, Y', strtotime( '+30 days' ) );
-		$last_valid_date     = date_i18n( 'F d, Y', strtotime( '+31 days' ) );
+		$coupon_date_expires = date_i18n( $date_format, strtotime( '+30 days' ) );
+		$last_valid_date     = date_i18n( $date_format, strtotime( '+31 days' ) );
 		$coupon_code_style_1 = '<div class="woo-thank-you-page-customizer-coupon-input">' . $coupon_code . '</div>';
 		$content             = str_replace( '{coupon_code_style_1}', $coupon_code_style_1, $content );
 		$content             = str_replace( array(
@@ -163,7 +164,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 			return;
 		}
 		ob_start();
-		$keyword = filter_input( INPUT_GET, 'keyword', FILTER_SANITIZE_STRING );
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 		if ( empty( $keyword ) ) {
 			die();
 		}
@@ -226,9 +227,9 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		ob_start();
 
-		$keyword = filter_input( INPUT_GET, 'keyword', FILTER_SANITIZE_STRING );
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 		if ( ! $keyword ) {
-			$keyword = filter_input( INPUT_POST, 'keyword', FILTER_SANITIZE_STRING );
+			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
 		}
 		if ( empty( $keyword ) ) {
 			die();
@@ -264,7 +265,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		ob_start();
 
-		$keyword = filter_input( INPUT_GET, 'keyword', FILTER_SANITIZE_STRING );
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 
 		if ( empty( $keyword ) ) {
 			die();
@@ -340,9 +341,9 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		ob_start();
 
-		$keyword = filter_input( INPUT_GET, 'keyword', FILTER_SANITIZE_STRING );
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 		if ( ! $keyword ) {
-			$keyword = filter_input( INPUT_POST, 'keyword', FILTER_SANITIZE_STRING );
+			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
 		}
 		if ( empty( $keyword ) ) {
 			die();

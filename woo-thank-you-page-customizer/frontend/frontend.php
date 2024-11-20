@@ -100,10 +100,20 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
-		if ( ( $this->enable || ( ! empty( $args['order'] ) && wc_get_order( $args['order'] ) ) ) && $template_name === 'checkout/thankyou.php' ) {
+		$enable = false;
+		if (   ! empty( $args['order'] ) && ($order = wc_get_order( $args['order'] ) ) && $template_name === 'checkout/thankyou.php'  ) {
+			if (!$this->enable){
+				$order_status = $this->get_params( 'order_status' );
+				if ( is_array( $order_status ) && !empty( $order_status ) && in_array( 'wc-' . $order->get_status(), $order_status ) ) {
+					$this->enable = $enable = true;
+				}
+			}else{
+				$enable = true;
+			}
+		}
+		if ($enable){
 			$located = VI_WOO_THANK_YOU_PAGE_TEMPLATES . 'thankyou.php';
 		}
-
 		return $located;
 	}
 
@@ -131,6 +141,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		$order_id     = isset( $shortcodes['order_number'] ) ? $shortcodes['order_number'] : '';
 		$email        = isset( $shortcodes['billing_email'] ) ? sanitize_email( $shortcodes['billing_email'] ) : '';
 		$message_fail = esc_html__( 'There was problem sending email but you can always view your coupon gift by going to Account settings/Orders', 'woo-thank-you-page-customizer' );
+		$date_format  = wc_date_format();
 		if ( $order_id && $email && $coupon_code ) {
 			if ( get_transient( 'woocommerce_thank_you_page_customizer_send_email_' . $order_id ) ) {
 				wp_send_json( array(
@@ -146,8 +157,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						$coupon_amount = $this->wc_price( $coupon->get_amount() );
 					}
 					$coupon_date_expires = $coupon->get_date_expires();
-					$last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( 'F d, Y', strtotime( $coupon_date_expires ) - 86400 );
-					$coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( 'F d, Y', strtotime( $coupon_date_expires ) );
+					$last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( $date_format, strtotime( $coupon_date_expires ) - 86400 );
+					$coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( $coupon_date_expires ) );
 					$send                = $this->send_email( $email, $coupon_code, $coupon_date_expires, $last_valid_date, $coupon_amount, $shortcodes, true );
 					if ( $send ) {
 						set_transient( 'woocommerce_thank_you_page_customizer_send_email_' . $order_id, time(), 86400 );
@@ -275,11 +286,12 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 			) );
 		} else {
 			$order = wc_get_order( $order_id );
+			$date_format = wc_date_format();
 			if ( $order ) {
 				$shortcodes                     = array(
 					'order_number'   => $order_id,
 					'order_status'   => $order->get_status(),
-					'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n( 'F d, Y' ) : '',
+					'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n( $date_format ) : '',
 					'order_total'    => $order->get_formatted_order_total(),
 					'order_subtotal' => $order->get_subtotal_to_display(),
 					'items_count'    => $order->get_item_count(),
@@ -310,9 +322,9 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 				$shortcodes['billing_address']  = ucwords( $billing_address );
 				$shipping_address               = WC()->countries->get_formatted_address( array(
 					'address_1' => $order->get_shipping_address_1(),
-					'city'      => $order->get_billing_city(),
-					'state'     => $order->get_billing_state(),
-					'country'   => $order->get_billing_country(),
+					'city'      => $order->get_shipping_city(),
+					'state'     => $order->get_shipping_state(),
+					'country'   => $order->get_shipping_country(),
 				), ', ' );
 				$shortcodes['shipping_address'] = ucwords( $shipping_address );
 				$country                        = new WC_Countries();
@@ -387,10 +399,11 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		array_walk_recursive( $blocks, array( $this, 'get_active_components' ) );
 
 		$order = wc_get_order( $this->order_id );
+		$date_format = wc_date_format();
 		if ( $order ) {
 			$this->shortcodes['order_number']   = $this->order_id;
 			$this->shortcodes['order_status']   = $order->get_status();
-			$this->shortcodes['order_date']     = $order->get_date_created() ? $order->get_date_created()->date_i18n( 'F d, Y' ) : '';
+			$this->shortcodes['order_date']     = $order->get_date_created() ? $order->get_date_created()->date_i18n( $date_format ) : '';
 			$this->shortcodes['order_total']    = $order->get_formatted_order_total();
 			$this->shortcodes['order_subtotal'] = $order->get_subtotal_to_display();
 			$this->shortcodes['items_count']    = $order->get_item_count();
@@ -1000,6 +1013,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		if ( ! $this->is_customize_preview ) {
 			return;
 		}
+		wp_enqueue_style( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_CSS . 'admin-style.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+
 		$shortcode_titles = array(
 			'coupon_code'         => esc_html__( 'Coupon code', 'woo-thank-you-page-customizer' ),
 			'coupon_code_style_1' => esc_html__( 'Coupon code style 1', 'woo-thank-you-page-customizer' ),
@@ -1564,6 +1579,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		$coupon_code       = $this->create_coupon( $order );
 		$coupon_code       = strtoupper( $coupon_code );
 		$this->coupon_code = $coupon_code;
+		$date_format = wc_date_format();
 		if ( $coupon_code ) {
 			if ( $this->get_params( 'coupon_type' )[0] == 'existing' ) {
 				$coupon = new WC_Coupon( $coupon_code );
@@ -1574,8 +1590,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						$this->coupon_amount = $this->wc_price( $coupon->get_amount() );
 					}
 					$coupon_date_expires       = $coupon->get_date_expires();
-					$this->last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( 'F d, Y', strtotime( $coupon_date_expires ) - 86400 );
-					$this->coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( 'F d, Y', strtotime( $coupon_date_expires ) );
+					$this->last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( $date_format, strtotime( $coupon_date_expires ) - 86400 );
+					$this->coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( $coupon_date_expires ) );
 					$coupon_message            = str_replace( '{coupon_code}', $this->coupon_code, $coupon_message );
 					$coupon_message            = str_replace( '{coupon_amount}', $this->coupon_amount, $coupon_message );
 					$coupon_message            = str_replace( '{last_valid_date}', $this->last_valid_date, $coupon_message );
@@ -1588,8 +1604,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 					$this->coupon_amount = $this->wc_price( $this->get_params( 'coupon_unique_amount' )[0] );
 				}
 				$coupon_date_expires       = $this->get_params( 'coupon_unique_date_expires' )[0];
-				$this->last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( 'F d, Y', strtotime( date_i18n( 'F d, Y' ) ) + $coupon_date_expires * 86400 );
-				$this->coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( 'F d, Y', strtotime( date_i18n( 'F d, Y' ) ) + ( $coupon_date_expires + 1 ) * 86400 );
+				$this->last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( $date_format, strtotime( date_i18n( $date_format ) ) + $coupon_date_expires * 86400 );
+				$this->coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( date_i18n( $date_format ) ) + ( $coupon_date_expires + 1 ) * 86400 );
 				$coupon_message            = str_replace( '{coupon_code}', $this->coupon_code, $coupon_message );
 				$coupon_message            = str_replace( '{coupon_amount}', $this->coupon_amount, $coupon_message );
 				$coupon_message            = str_replace( '{last_valid_date}', $this->last_valid_date, $coupon_message );

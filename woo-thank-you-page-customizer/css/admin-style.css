@@ -162,6 +162,10 @@ tr.wtyp-coupon-content.ui-sortable-handle.wtyp-coupon-content-editing {
 }
 
 /*shortcodes popup*/
+.woocommerce-thank-you-page-wp-editor-container,
+.woocommerce-thank-you-page-products-modal-container {
+    display: none;
+}
 .woocommerce-thank-you-page-wp-editor-container * {
     text-transform: unset !important;
 }

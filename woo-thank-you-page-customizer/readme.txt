@@ -3,8 +3,8 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
 Requires at least: 5.0
-Tested up to: 6.6.0
-WC tested up to: 9.0.2
+Tested up to: 6.7
+WC tested up to: 9.4
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -209,6 +209,10 @@ in elements on Thank You page.
 2. Customize your WooCommerce thank you page
 
 == Changelog ==
+/**1.1.6 - 2024.11.20**/
+- Fixed: Hide form at footer in customize mode
+- Fixed: Date format to Wordpress setting
+
 /**1.1.5 - 2024.07.09**/
 - Fixed: Fixed security
 – Updated: Compatible with WC9.0.2 and WP6.6.0

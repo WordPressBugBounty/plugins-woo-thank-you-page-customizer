@@ -129,7 +129,7 @@ class VI_WOO_THANK_YOU_PAGE_DATA {
 			'social_icons_facebook_select'  => 'wtyp_social_icons-facebook-app-logo',
 			'social_icons_facebook_color'   => '#3b579d',
 			'social_icons_twitter_url'      => '',
-			'social_icons_twitter_select'   => 'wtyp_social_icons-twitter-1',
+			'social_icons_twitter_select'   => 'wtyp_social_icons-twitter-new',
 			'social_icons_twitter_color'    => '#3CF',
 			'social_icons_pinterest_url'    => '',
 			'social_icons_pinterest_select' => 'wtyp_social_icons-pinterest-social-logo',

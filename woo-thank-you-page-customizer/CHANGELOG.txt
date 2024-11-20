@@ -1,3 +1,7 @@
+/**1.1.6 - 2024.11.20**/
+- Fixed: Hide form at footer in customize mode
+- Fixed: Date format to Wordpress setting
+
 /**1.1.5 - 2024.07.09**/
 - Fixed: Fixed security
 – Updated: Compatible with WC9.0.2 and WP6.6.0

@@ -24,6 +24,7 @@ $data        = new VI_WOO_THANK_YOU_PAGE_DATA();
 $blocks      = json_decode( $data->get_params( 'blocks' ) );
 $text_editor = json_decode( $data->get_params( 'text_editor' ), true );
 $wtypc       = new WTYPC_F_FUNCTIONS();
+$date_format = wc_date_format();
 
 if ( $order ) {
 	$order_id           = $order->get_id();
@@ -32,7 +33,7 @@ if ( $order ) {
 	$shortcodes         = array(
 		'order_number'   => $order_id,
 		'order_status'   => isset( $all_order_status[ 'wc-' . $order_status_check ] ) ? $all_order_status[ 'wc-' . $order_status_check ] : $order_status_check,
-		'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n( 'F d, Y' ) : '',
+		'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n( $date_format ) : '',
 		'order_total'    => $order->get_formatted_order_total(),
 		'order_subtotal' => $order->get_subtotal_to_display(),
 		'items_count'    => $order->get_item_count(),
@@ -850,8 +851,8 @@ if ( $order ) {
 																	$coupon_amount = wc_price( $coupon->get_amount() );
 																}
 																$date_expires        = $coupon->get_date_expires();
-																$coupon_date_expires = empty( $date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( 'F d, Y', strtotime( $date_expires ) );
-																$last_valid_date     = empty( $date_expires ) ? '' : date_i18n( 'F d, Y', strtotime( $date_expires ) - 86400 );
+																$coupon_date_expires = empty( $date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( $date_expires ) );
+																$last_valid_date     = empty( $date_expires ) ? '' : date_i18n( $date_format, strtotime( $date_expires ) - 86400 );
 																$coupon_message      = str_replace( '{coupon_code}', $coupon_code, $coupon_message );
 																$coupon_message      = str_replace( '{coupon_amount}', $coupon_amount, $coupon_message );
 																$coupon_message      = str_replace( '{last_valid_date}', $last_valid_date, $coupon_message );

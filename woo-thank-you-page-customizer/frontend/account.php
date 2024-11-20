@@ -37,13 +37,14 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Account {
 				$today        = strtotime( 'today' );
 				$date_expires = $coupon->get_date_expires();
 				$expires      = esc_html__( 'Never', 'woo-thank-you-page-customizer' );
+				$date_format = wc_date_format();
 				if ( $coupon->get_discount_type() == 'percent' ) {
 					$coupon_amount = $coupon->get_amount() . '%';
 				} else {
 					$coupon_amount = $this->wc_price( $coupon->get_amount() );
 				}
 				if ( $date_expires ) {
-					$expires = $date_expires->date_i18n( 'F d, Y' );
+					$expires = $date_expires->date_i18n( $date_format );
 					if ( $date_expires->getTimestamp() <= $today ) {
 						$css     = 'color:red;';
 						$expires = '<span style="' . $css . '">' . $expires . '</span>';
