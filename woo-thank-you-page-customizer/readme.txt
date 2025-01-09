@@ -4,7 +4,7 @@ Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
 Requires at least: 5.0
 Tested up to: 6.7
-WC tested up to: 9.4
+WC tested up to: 9.5
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -100,7 +100,7 @@ in elements on Thank You page.
 
 - [Project Page](https://villatheme.com)
 - [Documentation](http://docs.villatheme.com/?item=woo-thank-you-page-customizer)
-- [Report Bugs/Issues](https://villatheme.com/supports)
+- [Report Bugs/Issues](https://villatheme.com/knowledge-base/security-is-our-priority/)
 
 ### MAY BE YOU NEED
 

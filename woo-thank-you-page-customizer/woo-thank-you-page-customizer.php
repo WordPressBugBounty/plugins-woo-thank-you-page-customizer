@@ -10,10 +10,10 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: woo-thank-you-page-customizer
  * Domain Path: /languages
- * Copyright 2018-2024 VillaTheme.com. All rights reserved.
+ * Copyright 2018-2025 VillaTheme.com. All rights reserved.
  * Tested up to: 6.7
  * WC requires at least: 7.0
- * WC tested up to: 9.4
+ * WC tested up to: 9.5
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
  **/
