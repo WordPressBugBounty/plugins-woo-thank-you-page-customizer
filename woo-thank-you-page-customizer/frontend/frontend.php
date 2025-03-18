@@ -232,6 +232,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		$mailer  = WC()->mailer();
 		$email   = new WC_Email();
 		$content = $email->style_inline( $mailer->wrap_message( $heading, $content ) );
+
+		add_filter( 'viwec_disable_woocommerce_email_inline_style', '__return_false' );
 		$send    = $email->send( $user_email, $subject, $content, $headers, array() );
 		remove_filter( 'woocommerce_email_styles', array( $this, 'email_style' ) );
 		if ( $return ) {

@@ -404,6 +404,8 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                            data-tab="coupon"><?php esc_html_e( 'Coupon', 'woo-thank-you-page-customizer' ) ?></a>
                         <a class="item"
                            data-tab="email"><?php esc_html_e( 'Email', 'woo-thank-you-page-customizer' ) ?></a>
+                        <a class="item"
+                           data-tab="wcmail"><?php esc_html_e( 'WooCommerce email', 'woo-thank-you-page-customizer' ) ?></a>
                     </div>
                     <div class="vi-ui bottom attached tab segment active" data-tab="general">
                         <table class="form-table">
@@ -473,6 +475,15 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                             </tr>
                             <tr valign="top">
                                 <th scope="row">
+                                    <label><?php esc_html_e( 'Bing map API key', 'woo-thank-you-page-customizer' ) ?></label>
+                                </th>
+                                <td>
+                                    <a class="vi-ui button" target="_blank"
+                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <th scope="row">
                                     <label><?php esc_html_e( 'Design', 'woo-thank-you-page-customizer' ) ?></label>
                                 </th>
                                 <td>
@@ -496,6 +507,16 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                     <div class="vi-ui bottom attached tab segment" data-tab="coupon">
                         <table class="form-table wtyp-coupon-table">
                             <tbody>
+                            <tr valign="top">
+                                <th scope="row">
+                                    <label><?php esc_html_e( 'Coupon table condition', 'woo-thank-you-page-customizer' ) ?></label>
+                                </th>
+                                <td>
+                                    <a class="vi-ui button" target="_blank"
+                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                    <p class="description"><?php esc_html_e( 'A table provides multiple coupons and conditions for each coupon.', 'woo-thank-you-page-customizer' ) ?></p>
+                                </td>
+                            </tr>
                             <tr valign="top">
                                 <th scope="row">
                                     <label for="coupon_type"><?php esc_html_e( 'Select coupon', 'woo-thank-you-page-customizer' ) ?></label>
@@ -775,7 +796,6 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                             </tbody>
                         </table>
 
-
                     </div>
                     <div class="vi-ui bottom attached tab segment" data-tab="email">
                         <table class="form-table">
@@ -789,6 +809,16 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                                value="1" <?php checked( $this->settings->get_params( 'coupon_email_send' ), '1' ) ?>>
                                     </div>
                                     <p class="description"><?php echo esc_html__( 'Send coupon email if coupon is given on thank you page', 'woo-thank-you-page-customizer' ) ?></p>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <th scope="row">
+                                    <label><?php esc_html_e( 'Email template', 'woo-thank-you-page-customizer' ) ?></label>
+                                </th>
+                                <td>
+                                    <a class="vi-ui button" target="_blank"
+                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                    <p class="description"><?php echo wp_kses_post( 'You can use <a href="https://1.envato.market/BZZv1" target="_blank">WooCommerce Email Template Customizer</a> or <a href="https://bit.ly/woo-email-template-customizer" target="_blank">Email Template Customizer for WooCommerce</a> to create and customize your own email template. If no email template is selected, below email will be used.' ) ?></p>
                                 </td>
                             </tr>
                             <tr valign="top">
@@ -821,6 +851,31 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 </td>
                             </tr>
 
+                        </table>
+                    </div>
+
+                    <div class="vi-ui bottom attached tab segment" data-tab="wcmail">
+                        <table class="form-table">
+                            <tr valign="top">
+                                <th scope="row">
+                                    <label><?php esc_html_e( 'Include coupon info', 'woo-thank-you-page-customizer' ) ?></label>
+                                </th>
+                                <td>
+                                    <a class="vi-ui button" target="_blank"
+                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                    <p class="description"><?php echo esc_html__( 'Include coupon info in WooCommerce order email if coupon is given on thank you page.', 'woo-thank-you-page-customizer' ) ?></p>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <th scope="row">
+                                    <label><?php esc_html_e( 'Order status email', 'woo-thank-you-page-customizer' ) ?></label>
+                                </th>
+                                <td>
+                                    <a class="vi-ui button" target="_blank"
+                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                    <p class="description"><?php echo esc_html__( 'Apply Thank you page for order with this status.', 'woo-thank-you-page-customizer' ) ?></p>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                     <p>
