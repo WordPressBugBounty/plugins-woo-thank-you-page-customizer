@@ -118,10 +118,10 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	public function get_text_editor_content() {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		check_ajax_referer( 'viwtp_ajax_nonce', 'security' );
 		$shortcodes = isset( $_POST['shortcodes'] ) ? array_map( 'sanitize_text_field', $_POST['shortcodes'] ) : array();
 		$shortcodes = ! empty( $shortcodes ) ? array_map( 'stripslashes', $shortcodes ) : array();
 		$content    = isset( $_POST['content'] ) ? wp_kses_post( stripslashes( $_POST['content'] ) ) : array();
@@ -265,6 +265,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	public function apply_layout() {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
 		$this->is_customize_preview = true;
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -432,10 +433,11 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 		if ( is_customize_preview() && ! empty( $_REQUEST['customize_messenger_channel'] ) ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
 			$this->is_customize_preview = true;
-			wp_enqueue_style( 'woocommerce-thank-you-page-style', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			$src_min = WP_DEBUG ? '' : '.min';
+			wp_enqueue_style( 'woocommerce-thank-you-page-style', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			wp_enqueue_media();
-			wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			$google_map_address = $this->get_params( 'google_map_address' );
 			if ( $order ) {
 				$billing_address = $order->get_billing_address_1();
@@ -508,7 +510,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						$google_map_address = str_replace( '{billing_address}', $billing_address, $google_map_address );
 						$google_map_address = str_replace( '{shipping_address}', $shipping_address, $google_map_address );
 						$google_map_address = str_replace( '{store_address}', $store_address, $google_map_address );
-						wp_enqueue_script( 'woocommerce-thank-you-page-google-map-script', VI_WOO_THANK_YOU_PAGE_JS . 'woocommerce-thank-you-page-google-map.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+						$src_min = WP_DEBUG ? '' : '.min';
+						wp_enqueue_script( 'woocommerce-thank-you-page-google-map-script', VI_WOO_THANK_YOU_PAGE_JS . 'woocommerce-thank-you-page-google-map' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
 						wp_localize_script( 'woocommerce-thank-you-page-google-map-script', 'woo_thank_you_page_front_end_params', array(
 							'google_map_zoom_level' => $this->get_params( 'google_map_zoom_level' ),
 							'google_map_label'      => str_replace( array(
@@ -870,6 +873,13 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						), array(
 							'',
 						) );
+						$css .= $this->add_inline_style( array(
+							'social_icons_tiktok_color',
+						), '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-tiktok-follow .wtyp-social-button span:before', array(
+							'color',
+						), array(
+							'',
+						) );
 					}
 					if ( in_array( 'thank_you_message', $this->active_components ) ) {
 						/*thank you message*/
@@ -969,14 +979,16 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 				}
 				/*custom css*/
 				$css .= $this->get_params( 'custom_css' );
-				wp_enqueue_style( 'woocommerce-thank-you-page-style', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				$src_min = WP_DEBUG ? '' : '.min';
+				wp_enqueue_style( 'woocommerce-thank-you-page-style', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 				wp_add_inline_style( 'woocommerce-thank-you-page-style', $css );
-				wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-				wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 
 			}
 		}
-		wp_enqueue_script( 'woocommerce-thank-you-page-script', VI_WOO_THANK_YOU_PAGE_JS . 'woocommerce-thank-you-page.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+		$src_min = WP_DEBUG ? '' : '.min';
+		wp_enqueue_script( 'woocommerce-thank-you-page-script', VI_WOO_THANK_YOU_PAGE_JS . 'woocommerce-thank-you-page' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
 		wp_localize_script( 'woocommerce-thank-you-page-script', 'woocommerce_thank_you_page_customizer_params', array(
 			'url'            => admin_url( 'admin-ajax.php' ),
 			'action'         => 'woocommerce_thank_you_page_customizer_send_email',
@@ -1365,6 +1377,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 				'social_icons_linkedin_select'  => $this->get_params( 'social_icons_linkedin_select' ),
 				'social_icons_youtube_url'      => $this->get_params( 'social_icons_youtube_url' ),
 				'social_icons_youtube_select'   => $this->get_params( 'social_icons_youtube_select' ),
+				'social_icons_tiktok_url'      => $this->get_params( 'social_icons_tiktok_url' ),
+				'social_icons_tiktok_select'   => $this->get_params( 'social_icons_tiktok_select' ),
 			),
 		);
 		$order       = wc_get_order( $this->order_id );
@@ -1417,6 +1431,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		$vkontakte_url       = isset( $icons_text['social_icons_vkontakte_url'] ) ? $icons_text['social_icons_vkontakte_url'] : '';
 		$linkedin_url        = isset( $icons_text['social_icons_linkedin_url'] ) ? $icons_text['social_icons_linkedin_url'] : '';
 		$youtube_url         = isset( $icons_text['social_icons_youtube_url'] ) ? $icons_text['social_icons_youtube_url'] : '';
+		$tiktok_url         = isset( $icons_text['social_icons_tiktok_url'] ) ? $icons_text['social_icons_tiktok_url'] : '';
 
 		$facebook_select  = isset( $icons_text['social_icons_facebook_select'] ) ? $icons_text['social_icons_facebook_select'] : '';
 		$twitter_select   = isset( $icons_text['social_icons_twitter_select'] ) ? $icons_text['social_icons_twitter_select'] : '';
@@ -1428,6 +1443,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		$vkontakte_select = isset( $icons_text['social_icons_vkontakte_select'] ) ? $icons_text['social_icons_vkontakte_select'] : '';
 		$linkedin_select  = isset( $icons_text['social_icons_linkedin_select'] ) ? $icons_text['social_icons_linkedin_select'] : '';
 		$youtube_select   = isset( $icons_text['social_icons_youtube_select'] ) ? $icons_text['social_icons_youtube_select'] : '';
+		$tiktok_select   = isset( $icons_text['social_icons_tiktok_select'] ) ? $icons_text['social_icons_tiktok_select'] : '';
 		$html             = '<div class="' . $this->set( array(
 				'social_icons__container',
 				'item__container'
@@ -1526,6 +1542,15 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		<?php
 		$youtube_html = ob_get_clean();
 		$html         .= '<li style="' . ( ! $youtube_url ? 'display:none' : '' ) . '" class="wtyp-youtube-follow">' . $youtube_html . '</li>';
+
+		ob_start(); ?>
+        <a target="<?php echo esc_attr( $social_icons_target ); ?>" href="<?php echo esc_url( $tiktok_url ) ?>"
+           class="wtyp-social-button wtyp-tiktok">
+            <span class="wtyp-social-icon <?php echo esc_attr( $tiktok_select ) ?>"></span>
+        </a>
+		<?php
+		$tiktok_html = ob_get_clean();
+		$html         .= '<li style="' . ( ! $tiktok_url ? 'display:none' : '' ) . '" class="wtyp-tiktok-follow">' . $tiktok_html . '</li>';
 
 		$html = apply_filters( 'wtyp_after_socials_html', $html );
 		$html .= '</ul></div>';

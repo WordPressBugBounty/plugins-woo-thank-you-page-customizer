@@ -40,6 +40,7 @@
                 delay: 250,
                 data: function (params) {
                     return {
+                        nonce: woo_thank_you_page_params.ajax_nonce,
                         keyword: params.term,
                         action: 'wtyp_search_product_parent',
                     };
@@ -67,6 +68,7 @@
                 delay: 250,
                 data: function (params) {
                     return {
+                        nonce: woo_thank_you_page_params.ajax_nonce,
                         keyword: params.term,
                         action: 'wtyp_search_cate',
                     };
@@ -149,7 +151,7 @@
                         action: 'woo_thank_you_page_get_text_editor_content',
                         shortcodes: shortcodes,
                         content: content,
-                        security: woocommerce_thank_you_page_customizer_params.ajax_nonce,
+                        nonce: woo_thank_you_page_params.ajax_nonce,
                     },
                     success: function (response) {
                         jQuery('.woocommerce-thank-you-page-preview-processing-overlay').hide();
@@ -360,6 +362,8 @@
                             'social_icons_linkedin_select': wp.customize('woo_thank_you_page_params[social_icons_linkedin_select]').get(),
                             'social_icons_youtube_url': wp.customize('woo_thank_you_page_params[social_icons_youtube_url]').get(),
                             'social_icons_youtube_select': wp.customize('woo_thank_you_page_params[social_icons_youtube_select]').get(),
+                            'social_icons_tiktok_url': wp.customize('woo_thank_you_page_params[social_icons_tiktok_url]').get(),
+                            'social_icons_tiktok_select': wp.customize('woo_thank_you_page_params[social_icons_tiktok_select]').get(),
                         },
                         payment_method_html: wtypc_b64EncodeUnicode(payment_method_html),
                         google_map_address: wp.customize('woo_thank_you_page_params[google_map_address]').get(),
@@ -446,6 +450,8 @@
                         'social_icons_linkedin_select': wp.customize('woo_thank_you_page_params[social_icons_linkedin_select]').get(),
                         'social_icons_youtube_url': wp.customize('woo_thank_you_page_params[social_icons_youtube_url]').get(),
                         'social_icons_youtube_select': wp.customize('woo_thank_you_page_params[social_icons_youtube_select]').get(),
+                        'social_icons_tiktok_url': wp.customize('woo_thank_you_page_params[social_icons_tiktok_url]').get(),
+                        'social_icons_tiktok_select': wp.customize('woo_thank_you_page_params[social_icons_tiktok_select]').get(),
                     },
                     payment_method_html: wtypc_b64EncodeUnicode(payment_method_html),
                     google_map_address: wp.customize('woo_thank_you_page_params[google_map_address]').get(),
@@ -612,6 +618,7 @@
     addPreviewControl('social_icons_vkontakte_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-vkontakte-follow .wtyp-social-button span:before', 'color');
     addPreviewControl('social_icons_linkedin_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-linkedin-follow .wtyp-social-button span:before', 'color');
     addPreviewControl('social_icons_youtube_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-youtube-follow .wtyp-social-button span:before', 'color');
+    addPreviewControl('social_icons_tiktok_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-tiktok-follow .wtyp-social-button span:before', 'color');
     wp.customize('woo_thank_you_page_params[social_icons_header]', function (value) {
         value.bind(function (newval) {
             if (shortcodes['order_number']) {
@@ -649,6 +656,8 @@
     addPreviewControlSocialUrl('linkedin');
     addPreviewControlSocialIcon('youtube');
     addPreviewControlSocialUrl('youtube');
+    addPreviewControlSocialIcon('tiktok');
+    addPreviewControlSocialUrl('tiktok');
 
     /*thank you message*/
     addPreviewControl('thank_you_message_color', '.woocommerce-thank-you-page-thank_you_message__container .woocommerce-thank-you-page-thank_you_message__detail', 'color');

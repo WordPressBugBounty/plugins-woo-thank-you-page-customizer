@@ -71,6 +71,11 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public function preview_emails_ajax() {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$date_format = wc_date_format();
 		$shortcodes          = array(
 			'order_number'   => 2019,
@@ -160,6 +165,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public static function search_coupon( $x = '', $post_types = 'shop_coupon' ) {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -221,6 +227,8 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public function search_cate() {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
+
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -258,6 +266,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public function search_product( $x = '', $post_types = array( 'product' ) ) {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -335,6 +344,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public function search_product_parent( $x = '', $post_types = array( 'product' ) ) {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -818,7 +828,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 <td>
                                     <a class="vi-ui button" target="_blank"
                                        href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
-                                    <p class="description"><?php echo wp_kses_post( 'You can use <a href="https://1.envato.market/BZZv1" target="_blank">WooCommerce Email Template Customizer</a> or <a href="https://bit.ly/woo-email-template-customizer" target="_blank">Email Template Customizer for WooCommerce</a> to create and customize your own email template. If no email template is selected, below email will be used.' ) ?></p>
+                                    <p class="description"><?php echo wp_kses_post( 'You can use <a href="https://1.envato.market/BZZv1" target="_blank">WooCommerce Email Template Customizer</a> or <a href="https://wordpress.org/plugins/email-template-customizer-for-woo" target="_blank">Email Template Customizer for WooCommerce</a> to create and customize your own email template. If no email template is selected, below email will be used.' ) ?></p>
                                 </td>
                             </tr>
                             <tr valign="top">
@@ -969,6 +979,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 					wp_dequeue_script( $script->handle );
 				}
 			}
+			$src_min = WP_DEBUG ? '' : '.min';
 			// style
 			wp_enqueue_style( 'woocommerce-thank-you-page-form', VI_WOO_THANK_YOU_PAGE_CSS . 'form.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			wp_enqueue_style( 'woocommerce-thank-you-page-button', VI_WOO_THANK_YOU_PAGE_CSS . 'button.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
@@ -980,9 +991,9 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 			wp_enqueue_style( 'woocommerce-thank-you-page-segment', VI_WOO_THANK_YOU_PAGE_CSS . 'segment.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			wp_enqueue_style( 'woocommerce-thank-you-page-menu', VI_WOO_THANK_YOU_PAGE_CSS . 'menu.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			wp_enqueue_style( 'woocommerce-thank-you-page-select2', VI_WOO_THANK_YOU_PAGE_CSS . 'select2.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_CSS . 'admin-style.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-coupon-villatheme-support', VI_WOO_THANK_YOU_PAGE_CSS . 'villatheme-support.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_CSS . 'admin-style' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-coupon-villatheme-support', VI_WOO_THANK_YOU_PAGE_CSS . 'villatheme-support' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			$css = '.woo-thank-you-page-customizer-coupon-input{line-height:46px;display:block;text-align: center;font-size: 24px;width: 100%;height: 46px;vertical-align: middle;margin: 0;color:' . $this->settings->get_params( 'coupon_code_color' ) . ';background-color:' . $this->settings->get_params( 'coupon_code_bg_color' ) . ';border-width:' . $this->settings->get_params( 'coupon_code_border_width' ) . 'px;border-style:' . $this->settings->get_params( 'coupon_code_border_style' ) . ';border-color:' . $this->settings->get_params( 'coupon_code_border_color' ) . ';}';
 			wp_add_inline_style( 'woocommerce-thank-you-page-admin', $css );
 			//script
@@ -1002,8 +1013,11 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 			wp_enqueue_script( 'woocommerce-thank-you-page-tab', VI_WOO_THANK_YOU_PAGE_JS . 'tab.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
 			wp_enqueue_script( 'woocommerce-thank-you-page-address', VI_WOO_THANK_YOU_PAGE_JS . 'jquery.address-1.6.min.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
 			wp_enqueue_script( 'woocommerce-thank-you-page-select2', VI_WOO_THANK_YOU_PAGE_JS . 'select2.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_JS . 'admin-script.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_localize_script( 'woocommerce-thank-you-page-admin', 'wtypc_params_admin', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
+			wp_enqueue_script( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_JS . 'admin-script' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+			wp_localize_script( 'woocommerce-thank-you-page-admin', 'wtypc_params_admin', array(
+			        'url' => admin_url( 'admin-ajax.php' ),
+			        'ajax_nonce' => wp_create_nonce( 'viwtp_ajax_nonce' ),
+            ) );
 		}
 	}
 

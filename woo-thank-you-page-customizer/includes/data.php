@@ -155,6 +155,9 @@ class VI_WOO_THANK_YOU_PAGE_DATA {
 			'social_icons_youtube_url'      => '',
 			'social_icons_youtube_select'   => 'wtyp_social_icons-youtube-logotype',
 			'social_icons_youtube_color'    => '#ff0000',
+			'social_icons_tiktok_url'       => '',
+			'social_icons_tiktok_select'    => 'wtyp_social_icons-icbaseline-tiktok',
+			'social_icons_tiktok_color'     => '#000000',
 
 			'recently_viewed_products_limit'   => 4,
 			'recently_viewed_products_columns' => 4,

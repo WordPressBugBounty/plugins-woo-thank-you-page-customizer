@@ -57,6 +57,11 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 	}
 
 	public function get_available_shortcodes() {
+		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json( [] );
+		}
+
 		$order_id = isset( $_POST['order_id'] ) ? sanitize_text_field( $_POST['order_id'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$order    = wc_get_order( $order_id );
 		$date_format = wc_date_format();
@@ -202,6 +207,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 		$this->add_preview_style( 'social_icons_vkontakte_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-vkontakte-follow .wtyp-social-button span:before', 'color' );
 		$this->add_preview_style( 'social_icons_linkedin_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-linkedin-follow .wtyp-social-button span:before', 'color' );
 		$this->add_preview_style( 'social_icons_youtube_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-youtube-follow .wtyp-social-button span:before', 'color' );
+		$this->add_preview_style( 'social_icons_tiktok_color', '.woocommerce-thank-you-page-social_icons__container .wtyp-list-socials .wtyp-tiktok-follow .wtyp-social-button span:before', 'color' );
 
 		/*thank you message*/
 		$this->add_preview_style( 'thank_you_message_color', '.woocommerce-thank-you-page-thank_you_message__container .woocommerce-thank-you-page-thank_you_message__detail', 'color' );
@@ -246,9 +252,10 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 	}
 
 	public function customize_controls_enqueue_scripts() {
-		wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-		wp_enqueue_style( 'woocommerce-thank-you-page-available-components-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'available-components-icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-		wp_enqueue_style( 'woocommerce-thank-you-page-customize-preview-style', VI_WOO_THANK_YOU_PAGE_CSS . 'customize-preview.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+		$src_min = WP_DEBUG ? '' : '.min';
+		wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+		wp_enqueue_style( 'woocommerce-thank-you-page-available-components-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'available-components-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+		wp_enqueue_style( 'woocommerce-thank-you-page-customize-preview-style', VI_WOO_THANK_YOU_PAGE_CSS . 'customize-preview' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 	}
 
 
@@ -257,7 +264,8 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			$this->key      = wc_clean( $_REQUEST['key'] );// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$this->order_id = wc_get_order_id_by_order_key( $this->key );
 		}
-		wp_enqueue_script( 'woocommerce-thank-you-page-customize-preview-js', VI_WOO_THANK_YOU_PAGE_JS . 'customize-preview.js', array(
+		$src_min = WP_DEBUG ? '' : '.min';
+		wp_enqueue_script( 'woocommerce-thank-you-page-customize-preview-js', VI_WOO_THANK_YOU_PAGE_JS . 'customize-preview' . $src_min . '.js', array(
 			'jquery',
 			'customize-preview',
 			'select2',
@@ -2106,7 +2114,14 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			"wtyp_social_icons-youtube",
 			"wtyp_social_icons-youtube-logotype",
 			"wtyp_social_icons-youtube-logo",
-			"wtyp_social_icons-youtube-logo-1"
+			"wtyp_social_icons-youtube-logo-1",
+            "wtyp_social_icons-icbaseline-tiktok",
+            "wtyp_social_icons-ixtiktok-logo",
+            "wtyp_social_icons-lineiconstiktok-alt",
+            "wtyp_social_icons-magetiktok-circle",
+            "wtyp_social_icons-ritiktok-line",
+            "wtyp_social_icons-tablerbrand-tiktok-filled",
+            "wtyp_social_icons-tiktok",
 		);
 
 
@@ -2224,29 +2239,31 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 				'_self'  => esc_html__( 'Open link in current tab', 'woo-thank-you-page-customizer' ),
 			),
 		) );
-		$facebook = $twitter = $pinterest = $instagram = $dribbble = $tumblr = $google = $vkontakte = $linkedin = $youtube = array();
+		$facebook = $twitter = $pinterest = $instagram = $dribbble = $tumblr = $google = $vkontakte = $linkedin = $youtube = $tiktok = array();
 		for ( $i = 0; $i < sizeof( $icons ); $i ++ ) {
 			if ( $i < 6 ) {
 				$facebook[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 12 ) {
+			} elseif ( $i < 13 ) {
 				$twitter[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 19 ) {
+			} elseif ( $i < 20 ) {
 				$pinterest[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 27 ) {
+			} elseif ( $i < 28 ) {
 				$instagram[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 33 ) {
+			} elseif ( $i < 34 ) {
 				$dribbble[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 39 ) {
+			} elseif ( $i < 40 ) {
 				$tumblr[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 46 ) {
+			} elseif ( $i < 47 ) {
 				$google[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 52 ) {
+			} elseif ( $i < 53 ) {
 				$vkontakte[ $icons[ $i ] ] = $icons[ $i ];
-			} elseif ( $i < 58 ) {
+			} elseif ( $i < 59 ) {
 				$linkedin[ $icons[ $i ] ] = $icons[ $i ];
-			} else {
+			} elseif ( $i < 65 ) {
 				$youtube[ $icons[ $i ] ] = $icons[ $i ];
-			}
+			} else {
+				$tiktok[ $icons[ $i ] ] = $icons[ $i ];
+            }
 		}
 		/*facebook*/
 		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_facebook_url]', array(
@@ -2659,7 +2676,19 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 		);
 
 		/*linkedin*/
-
+		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_linkedin_url]', array(
+			'type'              => 'option',
+			'capability'        => 'manage_options',
+			'sanitize_callback' => 'sanitize_text_field',
+			'default'           => $this->settings->get_default( 'social_icons_linkedin_url' ),
+			'transport'         => 'postMessage'
+		) );
+		$wp_customize->add_control( 'woo_thank_you_page_params[social_icons_linkedin_url]', array(
+			'type'        => 'url',
+			'section'     => 'woo_thank_you_page_design_social_icons',
+			'label'       => esc_html__( 'Linkedin URL', 'woo-thank-you-page-customizer' ),
+			'description' => esc_html__( 'Your Linkedin URL', 'woo-thank-you-page-customizer' ),
+		) );
 		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_linkedin_select]', array(
 			'default'           => $this->settings->get_default( 'social_icons_linkedin_select' ),
 			'type'              => 'option',
@@ -2678,19 +2707,6 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 				)
 			)
 		);
-		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_linkedin_url]', array(
-			'type'              => 'option',
-			'capability'        => 'manage_options',
-			'sanitize_callback' => 'sanitize_text_field',
-			'default'           => $this->settings->get_default( 'social_icons_linkedin_url' ),
-			'transport'         => 'postMessage'
-		) );
-		$wp_customize->add_control( 'woo_thank_you_page_params[social_icons_linkedin_url]', array(
-			'type'        => 'url',
-			'section'     => 'woo_thank_you_page_design_social_icons',
-			'label'       => esc_html__( 'Linkedin URL', 'woo-thank-you-page-customizer' ),
-			'description' => esc_html__( 'Your Linkedin URL', 'woo-thank-you-page-customizer' ),
-		) );
 		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_linkedin_color]', array(
 			'default'           => $this->settings->get_default( 'social_icons_linkedin_color' ),
 			'type'              => 'option',
@@ -2709,7 +2725,19 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 		);
 
 		/*youtube*/
-
+		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_youtube_url]', array(
+			'type'              => 'option',
+			'capability'        => 'manage_options',
+			'sanitize_callback' => 'sanitize_text_field',
+			'default'           => $this->settings->get_default( 'social_icons_youtube_url' ),
+			'transport'         => 'postMessage'
+		) );
+		$wp_customize->add_control( 'woo_thank_you_page_params[social_icons_youtube_url]', array(
+			'type'        => 'url',
+			'section'     => 'woo_thank_you_page_design_social_icons',
+			'label'       => esc_html__( 'Youtube URL', 'woo-thank-you-page-customizer' ),
+			'description' => esc_html__( 'Your Youtube URL. Eg: https://www.youtube.com/channel/UCbCfnjbtBZIQfzLvXgNpbKw', 'woo-thank-you-page-customizer' ),
+		) );
 		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_youtube_select]', array(
 			'default'           => $this->settings->get_default( 'social_icons_youtube_select' ),
 			'type'              => 'option',
@@ -2728,19 +2756,6 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 				)
 			)
 		);
-		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_youtube_url]', array(
-			'type'              => 'option',
-			'capability'        => 'manage_options',
-			'sanitize_callback' => 'sanitize_text_field',
-			'default'           => $this->settings->get_default( 'social_icons_youtube_url' ),
-			'transport'         => 'postMessage'
-		) );
-		$wp_customize->add_control( 'woo_thank_you_page_params[social_icons_youtube_url]', array(
-			'type'        => 'url',
-			'section'     => 'woo_thank_you_page_design_social_icons',
-			'label'       => esc_html__( 'Youtube URL', 'woo-thank-you-page-customizer' ),
-			'description' => esc_html__( 'Your Youtube URL. Eg: https://www.youtube.com/channel/UCbCfnjbtBZIQfzLvXgNpbKw', 'woo-thank-you-page-customizer' ),
-		) );
 		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_youtube_color]', array(
 			'default'           => $this->settings->get_default( 'social_icons_youtube_color' ),
 			'type'              => 'option',
@@ -2752,6 +2767,55 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			new WP_Customize_Color_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_youtube_color]',
+				array(
+					'label'   => esc_html__( 'Icon Color', 'woo-thank-you-page-customizer' ),
+					'section' => 'woo_thank_you_page_design_social_icons',
+				) )
+		);
+
+		/*tiktok*/
+		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_tiktok_url]', array(
+			'type'              => 'option',
+			'capability'        => 'manage_options',
+			'sanitize_callback' => 'sanitize_text_field',
+			'default'           => $this->settings->get_default( 'social_icons_tiktok_url' ),
+			'transport'         => 'postMessage'
+		) );
+		$wp_customize->add_control( 'woo_thank_you_page_params[social_icons_tiktok_url]', array(
+			'type'        => 'url',
+			'section'     => 'woo_thank_you_page_design_social_icons',
+			'label'       => esc_html__( 'TikTok URL', 'woo-thank-you-page-customizer' ),
+			'description' => esc_html__( 'Your TikTok URL. Eg: https://www.tiktok.com/@username', 'woo-thank-you-page-customizer' ),
+		) );
+		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_tiktok_select]', array(
+			'default'           => $this->settings->get_default( 'social_icons_tiktok_select' ),
+			'type'              => 'option',
+			'capability'        => 'manage_options',
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'         => 'postMessage',
+		) );
+		$wp_customize->add_control(
+			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+				$wp_customize,
+				'woo_thank_you_page_params[social_icons_tiktok_select]',
+				array(
+					'label'   => 'Icons',
+					'section' => 'woo_thank_you_page_design_social_icons',
+					'choices' => $tiktok
+				)
+			)
+		);
+		$wp_customize->add_setting( 'woo_thank_you_page_params[social_icons_tiktok_color]', array(
+			'default'           => $this->settings->get_default( 'social_icons_tiktok_color' ),
+			'type'              => 'option',
+			'capability'        => 'manage_options',
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'         => 'postMessage',
+		) );
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'woo_thank_you_page_params[social_icons_tiktok_color]',
 				array(
 					'label'   => esc_html__( 'Icon Color', 'woo-thank-you-page-customizer' ),
 					'section' => 'woo_thank_you_page_design_social_icons',

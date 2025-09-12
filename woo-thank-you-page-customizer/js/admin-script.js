@@ -125,6 +125,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: wtypc_params_admin.ajax_nonce,
                     keyword: params.term
                 };
             },
@@ -150,6 +151,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: wtypc_params_admin.ajax_nonce,
                     keyword: params.term
                 };
             },
@@ -175,6 +177,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: wtypc_params_admin.ajax_nonce,
                     keyword: params.term
                 };
             },
@@ -200,6 +203,7 @@ jQuery(document).ready(function ($) {
             delay: 250,
             data: function (params) {
                 return {
+                    nonce: wtypc_params_admin.ajax_nonce,
                     keyword: params.term
                 };
             },
@@ -253,6 +257,7 @@ jQuery(document).ready(function ($) {
             dataType: 'JSON',
             data: {
                 action: 'wtypc_preview_emails',
+                nonce: wtypc_params_admin.ajax_nonce,
                 heading: $('#coupon-email-heading').val(),
                 content: tinyMCE.get('coupon_email_content') ? tinyMCE.get('coupon_email_content').getContent() : $('#coupon_email_content').val(),
             },

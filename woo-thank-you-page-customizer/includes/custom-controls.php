@@ -49,8 +49,9 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 			}
 
 			public function enqueue() {
-				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-social-icons', VI_WOO_THANK_YOU_PAGE_JS . 'custom-control-social-icons.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-social-icons-css', VI_WOO_THANK_YOU_PAGE_CSS . 'custom-control-social-icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				$src_min = WP_DEBUG ? '' : '.min';
+				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-social-icons', VI_WOO_THANK_YOU_PAGE_JS . 'custom-control-social-icons' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-social-icons-css', VI_WOO_THANK_YOU_PAGE_CSS . 'custom-control-social-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			}
 		}
 	}
@@ -311,7 +312,8 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 			}
 
 			public function enqueue() {
-				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-blocks-js', VI_WOO_THANK_YOU_PAGE_JS . 'custom-control-blocks.js', array(
+				$src_min = WP_DEBUG ? '' : '.min';
+				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-blocks-js', VI_WOO_THANK_YOU_PAGE_JS . 'custom-control-blocks' . $src_min . '.js', array(
 					'jquery',
 					'jquery-ui-sortable',
 					'jquery-ui-draggable',
@@ -364,8 +366,8 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 						'rows' => $rows
 					)
 				);
-				wp_enqueue_style( 'woocommerce-thank-you-page-icons-css', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-blocks-css', VI_WOO_THANK_YOU_PAGE_CSS . 'custom-control-blocks.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-icons-css', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-blocks-css', VI_WOO_THANK_YOU_PAGE_CSS . 'custom-control-blocks' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
 			}
 		}
 	}
@@ -411,7 +413,8 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 			 * Enqueue our scripts and styles
 			 */
 			public function enqueue() {
-				wp_enqueue_style( 'woocommerce-thank-you-page-customizer-custom-controls-radio-image-css', VI_WOO_THANK_YOU_PAGE_CSS . 'customizer-radio-image.css', array(), '1.0', 'all' );
+				$src_min = WP_DEBUG ? '' : '.min';
+				wp_enqueue_style( 'woocommerce-thank-you-page-customizer-custom-controls-radio-image-css', VI_WOO_THANK_YOU_PAGE_CSS . 'customizer-radio-image' . $src_min . '.css', array(), '1.0', 'all' );
 			}
 
 			/**

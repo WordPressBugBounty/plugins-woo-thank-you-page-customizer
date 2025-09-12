@@ -1,3 +1,9 @@
+/**1.1.8 - 2025.09.12*/
+- Updated: Minify some source code
+- Updated: Add nonce for ajax actions
+- Updated: Rearrange customize social settings
+- Updated: Add TikTok social media
+
 /**1.1.7 - 2025.03.18**/
 - Fixed: Replace shortcode not working with WooCommerce Email Template Customizer
 - Updated: Add some setting description

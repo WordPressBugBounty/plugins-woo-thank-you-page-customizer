@@ -516,6 +516,7 @@ if ( $order ) {
 														$vkontakte_url = $data->get_params( 'social_icons_vkontakte_url' );
 														$linkedin_url = $data->get_params( 'social_icons_linkedin_url' );
 														$youtube_url = $data->get_params( 'social_icons_youtube_url' );
+														$tiktok_url = $data->get_params( 'social_icons_tiktok_url' );
 
 														$facebook_select  = $data->get_params( 'social_icons_facebook_select' );
 														$twitter_select   = $data->get_params( 'social_icons_twitter_select' );
@@ -527,6 +528,7 @@ if ( $order ) {
 														$vkontakte_select = $data->get_params( 'social_icons_vkontakte_select' );
 														$linkedin_select  = $data->get_params( 'social_icons_linkedin_select' );
 														$youtube_select   = $data->get_params( 'social_icons_youtube_select' );
+														$tiktok_select   = $data->get_params( 'social_icons_tiktok_select' );
 														$html             = '<div class="' . $data->set( array(
 																'social_icons__container',
 																'item__container'
@@ -664,6 +666,19 @@ if ( $order ) {
 															<?php
 															$youtube_html = ob_get_clean();
 															$html         .= '<li class="wtyp-youtube-follow">' . $youtube_html . '</li>';
+														}
+														if ( $tiktok_url ) {
+															ob_start();
+															?>
+                                                            <a target="<?php echo esc_attr( $social_icons_target ); ?>"
+                                                               href="<?php echo esc_url( $tiktok_url ) ?>"
+                                                               class="wtyp-social-button wtyp-tiktok"
+                                                               title="<?php esc_html_e( 'Follow Youtube', 'woo-thank-you-page-customizer' ) ?>">
+                                                                <span class="wtyp-social-icon <?php echo esc_attr( $tiktok_select ) ?>"></span>
+                                                            </a>
+															<?php
+															$tiktok_html = ob_get_clean();
+															$html         .= '<li class="wtyp-tiktok-follow">' . $tiktok_html . '</li>';
 														}
 														$html = apply_filters( 'wtyp_after_socials_html', $html );
 														$html .= '</ul></div>';
