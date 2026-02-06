@@ -4,7 +4,7 @@ Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
 Requires at least: 5.0
 Tested up to: 6.8
-WC tested up to: 10.1
+WC tested up to: 10.2
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,8 +18,10 @@ WooCommerce Thank You Page Customizer allows you to customize your â€œThank Youâ
 
 >[Try the Demo](http://new2new.com/?item=woo-thank-you-page-customizer "Demo Thank You Page Customizer for WooCommerce") | [Documents](http://docs.villatheme.com/?item=woo-thank-you-page-customizer "Documents")| [Premium version](https://1.envato.market/Q3Weo) | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
 
-### This additional video will show you how to use WooCommerce Thank You Page Customizer
+### Preview Thank You Page Customizer for WooCommerce
+[youtube https://youtu.be/NV1sudcbkzY]
 
+### This additional video will show you how to use WooCommerce Thank You Page Customizer
 [youtube https://youtu.be/USEtaQWATSI]
 
 ### Important Notice:
@@ -227,6 +229,9 @@ in elements on Thank You page.
 2. Thank you page on frontend
 
 == Changelog ==
+/**1.1.9 - 2025.11.24*/
+- Fixed: Fix nonce for ajax actions
+
 /**1.1.8 - 2025.09.12*/
 - Updated: Minify some source code
 - Updated: Add nonce for ajax actions

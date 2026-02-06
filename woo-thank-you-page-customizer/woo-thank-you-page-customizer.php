@@ -3,7 +3,7 @@
  * Plugin Name: Thank You Page Customizer for WooCommerce
  * Plugin URI: https://villatheme.com/extensions/woo-thank-you-page-customizer
  * Description: Craft a stunning thank you page effortlessly with our user-friendly customization tools, offer coupons to customers after purchase.
- * Version: 1.1.8
+ * Version: 1.1.9
  * Author: VillaTheme
  * Author URI: https://villatheme.com
  * License:           GPL v2 or later
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'VI_WOO_THANK_YOU_PAGE_VERSION', '1.1.8' );
+define( 'VI_WOO_THANK_YOU_PAGE_VERSION', '1.1.9' );
 /**
  * Detect plugin. For use on Front End only.
  */

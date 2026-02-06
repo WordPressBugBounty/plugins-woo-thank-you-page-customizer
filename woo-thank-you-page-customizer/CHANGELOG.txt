@@ -1,3 +1,6 @@
+/**1.1.9 - 2025.11.24*/
+- Fixed: Fix nonce for ajax actions
+
 /**1.1.8 - 2025.09.12*/
 - Updated: Minify some source code
 - Updated: Add nonce for ajax actions
