@@ -105,8 +105,8 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 			'shop_url'   => get_option( 'woocommerce_shop_page_id', '' ) ? get_page_link( get_option( 'woocommerce_shop_page_id' ) ) : '',
 
 		);
-		$content             = isset( $_GET['content'] ) ? wp_kses_post( stripslashes( $_GET['content'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$heading             = isset( $_GET['heading'] ) ? sanitize_text_field( stripslashes( $_GET['heading'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$content             = isset( $_GET['content'] ) ? wp_kses_post( wp_unslash( $_GET['content'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$heading             = isset( $_GET['heading'] ) ? wp_kses_post( wp_unslash( $_GET['heading'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$coupon_amount       = '10%';
 		$coupon_code         = 'HAPPY';
 		$coupon_date_expires = date_i18n( $date_format, strtotime( '+30 days' ) );
@@ -170,7 +170,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 			return;
 		}
 		ob_start();
-		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 		if ( empty( $keyword ) ) {
 			die();
 		}
@@ -235,7 +235,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		ob_start();
 
-		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 		if ( ! $keyword ) {
 			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
 		}
@@ -274,7 +274,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		ob_start();
 
-		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 
 		if ( empty( $keyword ) ) {
 			die();
@@ -351,7 +351,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		ob_start();
 
-		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 		if ( ! $keyword ) {
 			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
 		}

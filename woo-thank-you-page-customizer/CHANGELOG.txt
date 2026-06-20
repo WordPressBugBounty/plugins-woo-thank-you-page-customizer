@@ -1,3 +1,10 @@
+/**1.2.1 - 2026.06.20**/
+- Updated: VillaTheme support
+
+/**1.2.0 - 2026.03.27*/
+- Updated: Displayed plugin notifications via pop-ups instead of alert() on the Thank You page
+- Updated: Optimize code
+
 /**1.1.9 - 2025.11.24*/
 - Fixed: Fix nonce for ajax actions
 
@@ -17,37 +24,37 @@
 
 /**1.1.5 - 2024.07.09**/
 - Fixed: Fixed security
-– Updated: Compatible with WC9.0.2 and WP6.6.0
+- Updated: Compatible with WC9.0.2 and WP6.6.0
 - Updated: Update support file
 
 /**1.1.4 - 2024.04.13**/
 - Fixed: Fixed cannot save/edit text editor block
-– Updated: Compatible with WC 8.7.0 and WP6.5.0
+- Updated: Compatible with WC 8.7.0 and WP6.5.0
 - Updated: Update support file
 
 /**1.1.3 - 2024.02.26**/
 - Fixed: Fixed security
 
 /**1.1.2 - 2024.02.16**/
-– Updated: Compatible with WC 8.6.0 and WP6.4.0
+- Updated: Compatible with WC 8.6.0 and WP6.4.0
 - Updated: Update support file
 
 /**1.1.1 - 2023.08.11**/
-– Updated: Compatible with WC 8.0.0 and WP6.3.0
+- Updated: Compatible with WC 8.0.0 and WP6.3.0
 - Fixed: Fixed incorrect google shipping address
 
 /**1.1.0 - 2023.07.15**/
-– Updated: Compatible with HPOS-WC 7.8.0
+- Updated: Compatible with HPOS-WC 7.8.0
 - Updated: Update support file
 
 /**1.0.14 - 2023.03.23**/
 - Fixed: Fixed security
-– Updated: Compatible with WC 7.5.0 and WP6.2.0
+- Updated: Compatible with WC 7.5.0 and WP6.2.0
 
 /**1.0.13 - 2023.02.23**/
 - Updated: Update support file
-– Updated: Compatible with WC 7.4.0 and WP6.1.0
-– Updated: Language file
+- Updated: Compatible with WC 7.4.0 and WP6.1.0
+- Updated: Language file
 
 /**1.0.12 - 2022.09.27**/
 - Fixed: Some html tag display as text in backend

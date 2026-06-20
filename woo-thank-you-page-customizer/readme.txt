@@ -3,8 +3,8 @@ Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
 Requires at least: 5.0
-Tested up to: 6.8
-WC tested up to: 10.2
+Tested up to: 7.0
+WC tested up to: 10.8
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,7 @@ Craft a stunning thank you page effortlessly with our user-friendly customizatio
 
 == Description ==
 
-WooCommerce Thank You Page Customizer allows you to customize your “Thank You” page what give coupons to customers and show up-sell products after a successful order.
+WooCommerce Thank You Page Customizer allows you to customize your "Thank You" page what give coupons to customers and show up-sell products after a successful order.
 
 >[Try the Demo](http://new2new.com/?item=woo-thank-you-page-customizer "Demo Thank You Page Customizer for WooCommerce") | [Documents](http://docs.villatheme.com/?item=woo-thank-you-page-customizer "Documents")| [Premium version](https://1.envato.market/Q3Weo) | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
 
@@ -108,9 +108,9 @@ in elements on Thank You page.
 
 [VARGAL - Additional Variation Gallery for Woo](https://wordpress.org/plugins/vargal-additional-variation-gallery-for-woo)
 
-[AFFI – Affiliate Marketing for WooCommerce](https://wordpress.org/plugins/affi-affiliate-marketing-for-woo)
+[AFFI - Affiliate Marketing for WooCommerce](https://wordpress.org/plugins/affi-affiliate-marketing-for-woo)
 
-[9Map – Map Multi Locations](https://wordpress.org/plugins/9map-map-multi-locations)
+[9Map - Map Multi Locations](https://wordpress.org/plugins/9map-map-multi-locations)
 
 [TMDS - Dropshipping for TEMU and Woo](https://wordpress.org/plugins/tmds-dropshipping-for-temu-and-woo)
 
@@ -124,43 +124,43 @@ in elements on Thank You page.
 
 [GIFT4U - Gift Cards All in One for Woo](https://wordpress.org/plugins/gift4u-gift-cards-all-in-one-for-woo)
 
-[SUBRE – Product Subscription for WooCommerce](https://wordpress.org/plugins/subre-product-subscription-for-woo)
+[SUBRE - Product Subscription for WooCommerce](https://wordpress.org/plugins/subre-product-subscription-for-woo)
 
 [Clear Autoptimize Cache Automatically](https://wordpress.org/plugins/clear-autoptimize-cache-automatically)
 
-[FEWC – WooCommerce Extra Checkout Fields](https://wordpress.org/plugins/fewc-extra-checkout-fields-for-woocommerce)
+[FEWC - WooCommerce Extra Checkout Fields](https://wordpress.org/plugins/fewc-extra-checkout-fields-for-woocommerce)
 
-[EPOW – Custom Product Options for WooCommerce](https://wordpress.org/plugins/epow-custom-product-options-for-woocommerce)
+[EPOW - Custom Product Options for WooCommerce](https://wordpress.org/plugins/epow-custom-product-options-for-woocommerce)
 
-[ChinaDS – Taobao Dropshipping for WooCommerce](https://wordpress.org/plugins/chinads-dropshipping-taobao-woocommerce)
+[ChinaDS - Taobao Dropshipping for WooCommerce](https://wordpress.org/plugins/chinads-dropshipping-taobao-woocommerce)
 
-[9MAIL – WordPress Email Templates Designer](https://wordpress.org/plugins/9mail-wp-email-templates-designer)
+[9MAIL - WordPress Email Templates Designer](https://wordpress.org/plugins/9mail-wp-email-templates-designer)
 
-[EPOI – WP Points and Rewards](https://wordpress.org/plugins/epoi-wp-points-and-rewards)
+[EPOI - WP Points and Rewards](https://wordpress.org/plugins/epoi-wp-points-and-rewards)
 
-[WebPOS – Point of Sale for WooCommerce](https://wordpress.org/plugins/webpos-point-of-sale-for-woocommerce)
+[WebPOS - Point of Sale for WooCommerce](https://wordpress.org/plugins/webpos-point-of-sale-for-woocommerce)
 
-[Jagif – WooCommerce Free Gift](https://wordpress.org/plugins/jagif-woo-free-gift)
+[Jagif - WooCommerce Free Gift](https://wordpress.org/plugins/jagif-woo-free-gift)
 
-[Coreem – Coupon Reminder for WooCommerce](https://wordpress.org/plugins/woo-coupon-reminder)
+[Coreem - Coupon Reminder for WooCommerce](https://wordpress.org/plugins/woo-coupon-reminder)
 
-[COMPE – WooCommerce Compare Products](https://wordpress.org/plugins/compe-woo-compare-products)
+[COMPE - WooCommerce Compare Products](https://wordpress.org/plugins/compe-woo-compare-products)
 
-[W2S – Migrate WooCommerce to Shopify](https://wordpress.org/plugins/w2s-migrate-woo-to-shopify)
+[W2S - Migrate WooCommerce to Shopify](https://wordpress.org/plugins/w2s-migrate-woo-to-shopify)
 
 [REDIS - WooCommerce Dynamic Pricing and Discounts](https://wordpress.org/plugins/redis-woo-dynamic-pricing-and-discounts)
 
-[EXMAGE – WordPress Image Links](https://wordpress.org/plugins/exmage-wp-image-links)
+[EXMAGE - WordPress Image Links](https://wordpress.org/plugins/exmage-wp-image-links)
 
-[Pofily – WooCommerce Product Filters](https://wordpress.org/plugins/pofily-woo-product-filters)
+[Pofily - WooCommerce Product Filters](https://wordpress.org/plugins/pofily-woo-product-filters)
 
 [Bopo - WooCommerce Product Bundle Builder](https://wordpress.org/plugins/bopo-woo-product-bundle-builder)
 
-[WPBulky – WordPress Bulk Edit Post Types](https://wordpress.org/plugins/wpbulky-wp-bulk-edit-post-types)
+[WPBulky - WordPress Bulk Edit Post Types](https://wordpress.org/plugins/wpbulky-wp-bulk-edit-post-types)
 
 [Bulky - Bulk Edit Products for WooCommerce](https://wordpress.org/plugins/bulky-bulk-edit-products-for-woo)
 
-[Catna – Woo Name Your Price and Offers](https://wordpress.org/plugins/catna-woo-name-your-price-and-offers)
+[Catna - Woo Name Your Price and Offers](https://wordpress.org/plugins/catna-woo-name-your-price-and-offers)
 
 [Product Size Chart For WooCommerce](https://wordpress.org/plugins/product-size-chart-for-woo)
 
@@ -212,7 +212,7 @@ in elements on Thank You page.
 
 [Notification for WooCommerce](https://wordpress.org/plugins/woo-notification)
 
-[CURCY – Multi Currency for WooCommerce](https://wordpress.org/plugins/woo-multi-currency)
+[CURCY - Multi Currency for WooCommerce](https://wordpress.org/plugins/woo-multi-currency)
 
 [Coupon Box for WooCommerce](https://wordpress.org/plugins/woo-coupon-box)
 
@@ -229,6 +229,13 @@ in elements on Thank You page.
 2. Thank you page on frontend
 
 == Changelog ==
+/**1.2.1 - 2026.06.20**/
+- Updated: VillaTheme support
+
+/**1.2.0 - 2026.03.27*/
+- Updated: Displayed plugin notifications via pop-ups instead of alert() on the Thank You page
+- Updated: Optimize code
+
 /**1.1.9 - 2025.11.24*/
 - Fixed: Fix nonce for ajax actions
 
@@ -248,37 +255,37 @@ in elements on Thank You page.
 
 /**1.1.5 - 2024.07.09**/
 - Fixed: Fixed security
-– Updated: Compatible with WC9.0.2 and WP6.6.0
+- Updated: Compatible with WC9.0.2 and WP6.6.0
 - Updated: Update support file
 
 /**1.1.4 - 2024.04.13**/
 - Fixed: Fixed cannot save/edit text editor block
-– Updated: Compatible with WC 8.7.0 and WP6.5.0
+- Updated: Compatible with WC 8.7.0 and WP6.5.0
 - Updated: Update support file
 
 /**1.1.3 - 2024.02.26**/
 - Fixed: Fixed security
 
 /**1.1.2 - 2024.02.16**/
-– Updated: Compatible with WC 8.6.0 and WP6.4.0
+- Updated: Compatible with WC 8.6.0 and WP6.4.0
 - Updated: Update support file
 
 /**1.1.1 - 2023.08.11**/
-– Updated: Compatible with WC 8.0.0 and WP6.3.0
+- Updated: Compatible with WC 8.0.0 and WP6.3.0
 - Fixed: Fixed incorrect google shipping address
 
 /**1.1.0 - 2023.07.15**/
-– Updated: Compatible with HPOS-WC 7.8.0
+- Updated: Compatible with HPOS-WC 7.8.0
 - Updated: Update support file
 
 /**1.0.14 - 2023.03.23**/
 - Fixed: Fixed security
-– Updated: Compatible with WC 7.5.0 and WP6.2.0
+- Updated: Compatible with WC 7.5.0 and WP6.2.0
 
 /**1.0.13 - 2023.02.23**/
 - Updated: Update support file
-– Updated: Compatible with WC 7.4.0 and WP6.1.0
-– Updated: Language file
+- Updated: Compatible with WC 7.4.0 and WP6.1.0
+- Updated: Language file
 
 /**1.0.12 - 2022.09.27**/
 - Fixed: Some html tag display as text in backend
