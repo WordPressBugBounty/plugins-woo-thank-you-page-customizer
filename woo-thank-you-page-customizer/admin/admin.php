@@ -34,7 +34,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Admin {
 					'support'    => 'https://wordpress.org/support/plugin/woo-thank-you-page-customizer/',
 					'docs'       => 'http://docs.villatheme.com/?item=woo-thank-you-page-customizer',
 					'review'     => 'https://wordpress.org/support/plugin/woo-thank-you-page-customizer/reviews/?rate=5#rate-response',
-					'pro_url'    => 'https://1.envato.market/Q3Weo',
+					'pro_url'    => 'https://villatheme.com/extensions/woocommerce-thank-you-page-customizer',
 					'css'        => VI_WOO_THANK_YOU_PAGE_CSS,
 					'image'      => VI_WOO_THANK_YOU_PAGE_IMAGES,
 					'slug'       => 'woo-thank-you-page-customizer',

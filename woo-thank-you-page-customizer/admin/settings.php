@@ -489,7 +489,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 </th>
                                 <td>
                                     <a class="vi-ui button" target="_blank"
-                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                       href="https://villatheme.com/extensions/woocommerce-thank-you-page-customizer"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
                                 </td>
                             </tr>
                             <tr valign="top">
@@ -523,7 +523,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 </th>
                                 <td>
                                     <a class="vi-ui button" target="_blank"
-                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                       href="https://villatheme.com/extensions/woocommerce-thank-you-page-customizer"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
                                     <p class="description"><?php esc_html_e( 'A table provides multiple coupons and conditions for each coupon.', 'woo-thank-you-page-customizer' ) ?></p>
                                 </td>
                             </tr>
@@ -827,7 +827,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 </th>
                                 <td>
                                     <a class="vi-ui button" target="_blank"
-                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                       href="https://villatheme.com/extensions/woocommerce-thank-you-page-customizer"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
                                     <p class="description"><?php echo wp_kses_post( 'You can use <a href="https://1.envato.market/BZZv1" target="_blank">WooCommerce Email Template Customizer</a> or <a href="https://wordpress.org/plugins/email-template-customizer-for-woo" target="_blank">Email Template Customizer for WooCommerce</a> to create and customize your own email template. If no email template is selected, below email will be used.' ) ?></p>
                                 </td>
                             </tr>
@@ -872,7 +872,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 </th>
                                 <td>
                                     <a class="vi-ui button" target="_blank"
-                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                       href="https://villatheme.com/extensions/woocommerce-thank-you-page-customizer"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
                                     <p class="description"><?php echo esc_html__( 'Include coupon info in WooCommerce order email if coupon is given on thank you page.', 'woo-thank-you-page-customizer' ) ?></p>
                                 </td>
                             </tr>
@@ -882,7 +882,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 </th>
                                 <td>
                                     <a class="vi-ui button" target="_blank"
-                                       href="https://1.envato.market/Q3Weo"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
+                                       href="https://villatheme.com/extensions/woocommerce-thank-you-page-customizer"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
                                     <p class="description"><?php echo esc_html__( 'Apply Thank you page for order with this status.', 'woo-thank-you-page-customizer' ) ?></p>
                                 </td>
                             </tr>
