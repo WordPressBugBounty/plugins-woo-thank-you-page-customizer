@@ -1,28 +1,28 @@
-=== Thank You Page Customizer for WooCommerce - Increase Your Sales===
+=== Thanko Thank You Page Customizer for WooCommerce - Increase Your Sales===
 Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
 Requires at least: 5.0
-Tested up to: 7.0
-WC tested up to: 11.0
+Tested up to: 7.1
+WC tested up to: 11.1
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Requires PHP: 7.0
+Requires PHP: 7.4
 WC requires at least: 7.0
 
 Craft a stunning thank you page effortlessly with our user-friendly customization tools, offer coupons to customers after purchase.
 
 == Description ==
 
-WooCommerce Thank You Page Customizer allows you to customize your "Thank You" page what give coupons to customers and show up-sell products after a successful order.
+WooCommerce Thanko Thank You Page Customizer allows you to customize your "Thank You" page what give coupons to customers and show up-sell products after a successful order.
 
->[Try the Demo](http://new2new.com/?item=woo-thank-you-page-customizer "Demo Thank You Page Customizer for WooCommerce") | [Documents](http://docs.villatheme.com/?item=woo-thank-you-page-customizer "Documents")| [Premium version](https://villatheme.com/extensions/woocommerce-thank-you-page-customizer) | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
+>[Try the Demo](http://new2new.com/?item=woo-thank-you-page-customizer "Demo Thanko Thank You Page Customizer for WooCommerce") | [Documents](http://docs.villatheme.com/?item=woo-thank-you-page-customizer "Documents")| [Premium version](https://villatheme.com/extensions/woocommerce-thank-you-page-customizer) | [Facebook group](https://www.facebook.com/groups/villatheme "VillaTheme")
 
-### Preview Thank You Page Customizer for WooCommerce
+### Preview Thanko Thank You Page Customizer for WooCommerce
 [youtube https://youtu.be/NV1sudcbkzY]
 
-### This additional video will show you how to use WooCommerce Thank You Page Customizer
+### This additional video will show you how to use WooCommerce Thanko Thank You Page Customizer
 [youtube https://youtu.be/USEtaQWATSI]
 
 ### Important Notice:
@@ -33,9 +33,9 @@ WooCommerce Thank You Page Customizer allows you to customize your "Thank You" p
 
 ###FEATURES OF WOOCOMMERCE THANK YOU PAGE CUSTOMIZER GIVE COUPON
 
-WooCommerce Thank You Page Customizer will give a coupon after a successful order. Moreover,  you can choose to give an existing coupon or let the plugin generate unique coupons.
+WooCommerce Thanko Thank You Page Customizer will give a coupon after a successful order. Moreover,  you can choose to give an existing coupon or let the plugin generate unique coupons.
 
-&#9658; **Customize:**WooCommerce Thank You Page Customizer allows you to drag and drop elements to build your own Thank You page in customize mode so every change you make will affect immediately for you to preview, which could save a lot of time.
+&#9658; **Customize:**WooCommerce Thanko Thank You Page Customizer allows you to drag and drop elements to build your own Thank You page in customize mode so every change you make will affect immediately for you to preview, which could save a lot of time.
 
 &#9658; **Components:**Thank you message, coupon, order confirmation, order details, social media, google map and text editor
 
@@ -51,14 +51,14 @@ WooCommerce Thank You Page Customizer will give a coupon after a successful orde
 
 &#9658; **Responsive:**Responsive on different devices
 
-&#9658; **Coupon rules:**Select WooCommerce coupon: Create a coupon in WooCommerce/ Coupon and use it in WooCommerce Thank You Page Customizer.
+&#9658; **Coupon rules:**Select WooCommerce coupon: Create a coupon in WooCommerce/ Coupon and use it in WooCommerce Thanko Thank You Page Customizer.
 
  - **Existing Coupon**: Choose an existing WooCommerce Coupon to give to customers after they successfully order an order.
 
- - **Unique Coupon:** WooCommerce Thank You Page Customizer will generate unique coupons for each order and display them
+ - **Unique Coupon:** WooCommerce Thanko Thank You Page Customizer will generate unique coupons for each order and display them
   on the Thank You page. You can set up the generated coupon with the same options as WooCommerce coupons.
 
-&#9658; **SHORTCODES:** WooCommerce Thank You Page Customizer provides shortcodes for you to display order information
+&#9658; **SHORTCODES:** WooCommerce Thanko Thank You Page Customizer provides shortcodes for you to display order information
 in elements on Thank You page.
 
 ### PRO VERSION:
@@ -187,7 +187,7 @@ in elements on Thank You page.
 
 [Virtual Reviews for WooCommerce](https://wordpress.org/plugins/woo-virtual-reviews)
 
-[Thank You Page Customizer for WooCommerce](https://wordpress.org/plugins/woo-thank-you-page-customizer)
+[Thanko Thank You Page Customizer for WooCommerce](https://wordpress.org/plugins/woo-thank-you-page-customizer)
 
 [Sales Countdown Timer](https://wordpress.org/plugins/sales-countdown-timer)
 
@@ -231,6 +231,9 @@ in elements on Thank You page.
 
 == Changelog ==
 
+2026.09.17 - version 1.2.3
+- Fixed: Prevent order customer data from being exposed on thank you page without a valid order key
+
 2026.08.17 - version 1.2.2
 - Updated: Compatible WooCommerce 11.0
 
@@ -251,7 +254,7 @@ in elements on Thank You page.
 - Updated: Add TikTok social media
 
 2025.03.18 - version 1.1.7
-- Fixed: Replace shortcode not working with WooCommerce Email Template Customizer
+- Fixed: Replace shortcode not working with Mailonix – WooCommerce Email Template Customizer
 - Updated: Add some setting description
 
 2024.11.20 - version 1.1.6
@@ -299,7 +302,7 @@ in elements on Thank You page.
 - Updated: Compatibility with WC6.9.0 and WP6.0.2
 
 2022.06.15 - version 1.0.11
-- Added: Compatibility with WooCommerce Email Template Customizer (free & premium) - only use coupon generated by ETC when option "Send coupon on Thank You page" is disabled
+- Added: Compatibility with Mailonix – WooCommerce Email Template Customizer (free & premium) - only use coupon generated by ETC when option "Send coupon on Thank You page" is disabled
 
 2022.05.21 - version 1.0.10
 - Updated: Compatibility with WC6.5.0 and WP6.0.0

@@ -828,7 +828,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
                                 <td>
                                     <a class="vi-ui button" target="_blank"
                                        href="https://villatheme.com/extensions/woocommerce-thank-you-page-customizer"><?php esc_html_e( 'Upgrade This Feature', 'woo-thank-you-page-customizer' ) ?></a>
-                                    <p class="description"><?php echo wp_kses_post( 'You can use <a href="https://1.envato.market/BZZv1" target="_blank">WooCommerce Email Template Customizer</a> or <a href="https://wordpress.org/plugins/email-template-customizer-for-woo" target="_blank">Email Template Customizer for WooCommerce</a> to create and customize your own email template. If no email template is selected, below email will be used.' ) ?></p>
+                                    <p class="description"><?php echo wp_kses_post( 'You can use <a href="https://villatheme.com/extensions/woocommerce-email-template-customizer" target="_blank">Mailonix – WooCommerce Email Template Customizer</a> or <a href="https://wordpress.org/plugins/email-template-customizer-for-woo" target="_blank">Email Template Customizer for WooCommerce</a> to create and customize your own email template. If no email template is selected, below email will be used.' ) ?></p>
                                 </td>
                             </tr>
                             <tr valign="top">

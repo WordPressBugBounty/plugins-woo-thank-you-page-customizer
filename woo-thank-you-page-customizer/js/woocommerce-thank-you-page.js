@@ -21,6 +21,7 @@ jQuery(document).ready(function ($) {
                 data: {
                     action: woocommerce_thank_you_page_customizer_params.action,
                     shortcodes: woocommerce_thank_you_page_customizer_params.shortcodes,
+                    order_key: woocommerce_thank_you_page_customizer_params.order_key,
                     coupon_code: button.parent().parent().find('.woocommerce-thank-you-page-coupon__code-code').val(),
                     nonce: woocommerce_thank_you_page_customizer_params.nonce,
                 },

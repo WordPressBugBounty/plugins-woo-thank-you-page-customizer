@@ -92,6 +92,9 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	public function page_template_hierarchy( $templates ) {
+		if ( ! $this->get_params( 'enable' ) && ! is_customize_preview() ) {
+			return $templates;
+		}
 		if ( is_wc_endpoint_url( 'order-received' ) && in_array( 'order-confirmation', $templates ) ) {
 			unset( $templates[ array_search( 'order-confirmation', $templates ) ] );
 		}
@@ -101,18 +104,20 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 	public function wc_get_template( $located, $template_name, $args, $template_path, $default_path ) {
 		$enable = false;
-		if (   ! empty( $args['order'] ) && ($order = wc_get_order( $args['order'] ) ) && $template_name === 'checkout/thankyou.php'  ) {
-			if (!$this->enable){
-				$order_status = $this->get_params( 'order_status' );
-				if ( is_array( $order_status ) && !empty( $order_status ) && in_array( 'wc-' . $order->get_status(), $order_status ) ) {
-					$this->enable = $enable = true;
+		if ( $this->get_params( 'enable' ) || is_customize_preview() ) {
+			if ( ! empty( $args['order'] ) && ( $order = wc_get_order( $args['order'] ) ) && $template_name === 'checkout/thankyou.php' ) {
+				if ( ! $this->enable ) {
+					$order_status = $this->get_params( 'order_status' );
+					if ( is_array( $order_status ) && ! empty( $order_status ) && in_array( 'wc-' . $order->get_status(), $order_status ) ) {
+						$this->enable = $enable = true;
+					}
+				} else {
+					$enable = true;
 				}
-			}else{
-				$enable = true;
 			}
-		}
-		if ($enable){
-			$located = VI_WOO_THANK_YOU_PAGE_TEMPLATES . 'thankyou.php';
+			if ( $enable ) {
+				$located = VI_WOO_THANK_YOU_PAGE_TEMPLATES . 'thankyou.php';
+			}
 		}
 		return $located;
 	}
@@ -135,18 +140,69 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		die;
 	}
 
+	/**
+	 * Whether the current request may access order details (mirrors WooCommerce thank-you checks).
+	 *
+	 * @param mixed $order Order object.
+	 *
+	 * @return bool
+	 */
+	protected function can_view_order( $order ) {
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return false;
+		}
+
+		if ( is_customize_preview() && current_user_can( 'customize' ) ) {
+			return true;
+		}
+
+		$order_key = $this->key;
+		if ( ! $order_key ) {
+			$order_key = empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		}
+
+		if ( ! $order_key || ! hash_equals( $order->get_order_key(), $order_key ) ) {
+			return false;
+		}
+
+		/**
+		 * Indicates if known (non-guest) shoppers need to be logged in before accessing order received details.
+		 *
+		 * @param bool $verify_known_shoppers If verification is required.
+		 *
+		 * @since WooCommerce 8.4.0
+		 */
+		$verify_known_shoppers = apply_filters( 'woocommerce_order_received_verify_known_shoppers', true );
+		$order_customer_id     = (int) $order->get_customer_id();
+
+		if ( $verify_known_shoppers && $order_customer_id && get_current_user_id() !== $order_customer_id && ! current_user_can( 'manage_woocommerce' ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public function send_email_action() {
 		check_ajax_referer( 'viwtp_send_email_ajax_nonce', 'nonce' );
 		$shortcodes   = isset( $_POST['shortcodes'] ) && is_array( $_POST['shortcodes'] )
 			? map_deep( wp_unslash( $_POST['shortcodes'] ), 'sanitize_text_field' )
 			: array();
 		$coupon_code  = isset( $_POST['coupon_code'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) : '';
+		$order_key    = isset( $_POST['order_key'] ) ? wc_clean( wp_unslash( $_POST['order_key'] ) ) : '';
 		$order_id     = isset( $shortcodes['order_number'] ) ? absint( $shortcodes['order_number'] ) : 0;
 		$message_fail = esc_html__( 'There was problem sending email but you can always view your coupon gift by going to Account settings/Orders', 'woo-thank-you-page-customizer' );
 		$date_format  = wc_date_format();
 		$order        = $order_id ? wc_get_order( $order_id ) : false;
-		$stored_coupon = ( $order && is_a( $order, 'WC_Order' ) ) ? $order->get_meta( 'woo_thank_you_page_coupon_code', true ) : '';
-		$email         = ( $order && is_a( $order, 'WC_Order' ) ) ? $order->get_billing_email() : '';
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) || ! $order_key || ! hash_equals( $order->get_order_key(), $order_key ) ) {
+			wp_send_json(
+				array(
+					'message' => $message_fail,
+				)
+			);
+			die;
+		}
+		$stored_coupon = $order->get_meta( 'woo_thank_you_page_coupon_code', true );
+		$email         = $order->get_billing_email();
 		$in_norm       = function_exists( 'wc_format_coupon_code' ) ? strtoupper( wc_format_coupon_code( $coupon_code ) ) : strtoupper( trim( $coupon_code ) );
 		$st_norm       = function_exists( 'wc_format_coupon_code' ) ? strtoupper( wc_format_coupon_code( $stored_coupon ) ) : strtoupper( trim( (string) $stored_coupon ) );
 		$coupon_ok     = $stored_coupon && $coupon_code && ( $in_norm === $st_norm );
@@ -401,14 +457,19 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 		if ( is_checkout() && ! empty( $wp->query_vars['order-received'] ) ) {
 			$this->order_id = absint( $wp->query_vars['order-received'] );
-			$this->key      = wc_clean( $_GET['key'] );// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
+			$this->key      = empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		} else {
 			return;
 		}
+
+		$order = wc_get_order( $this->order_id );
+		if ( ! $this->can_view_order( $order ) ) {
+			return;
+		}
+
 		$blocks = json_decode( $this->get_params( 'blocks' ), true );
 		array_walk_recursive( $blocks, array( $this, 'get_active_components' ) );
 
-		$order = wc_get_order( $this->order_id );
 		$date_format = wc_date_format();
 		if ( $order ) {
 			$this->shortcodes['order_number']   = $this->order_id;
@@ -1000,6 +1061,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 			'url'            => admin_url( 'admin-ajax.php' ),
 			'action'         => 'woocommerce_thank_you_page_customizer_send_email',
 			'shortcodes'     => $this->shortcodes,
+			'order_key'      => $this->key,
 			'copied_message' => esc_html__( 'Coupon code is copied to clipboard.', 'woo-thank-you-page-customizer' ),
 			'nonce'          => wp_create_nonce( 'viwtp_send_email_ajax_nonce' ),
 			'ajax_nonce'     => wp_create_nonce( 'viwtp_ajax_nonce' ),
