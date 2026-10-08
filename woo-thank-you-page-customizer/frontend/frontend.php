@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend
+ * Class WTYPC_Frontend_Frontend
  *
  */
 
-class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
+class WTYPC_Frontend_Frontend {
 	protected $settings;
 	protected $order_id;
 	protected $key;
@@ -35,7 +35,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	protected $payment_method_html;
 
 	public function __construct() {
-		$this->settings               = new VI_WOO_THANK_YOU_PAGE_DATA();
+		$this->settings               = new WTYPC_DATA();
 		$this->prefix                 = 'woocommerce-thank-you-page-';
 		$this->text_editor_id         = 0;
 		$this->active_components      = array();
@@ -86,7 +86,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		add_filter( 'page_template_hierarchy', array( $this, 'page_template_hierarchy' ), PHP_INT_MAX, 1 );
 		add_filter( 'wc_get_template', array( $this, 'wc_get_template' ), 99, 5 );
 		add_filter( 'woocommerce_valid_order_statuses_for_order_again', array(
-			'WTYPC_F_FUNCTIONS',
+			'WTYPC_Functions',
 			'woocommerce_valid_order_statuses_for_order_again'
 		) );
 	}
@@ -116,7 +116,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 				}
 			}
 			if ( $enable ) {
-				$located = VI_WOO_THANK_YOU_PAGE_TEMPLATES . 'thankyou.php';
+				$located = WTYPC_TEMPLATES . 'thankyou.php';
 			}
 		}
 		return $located;
@@ -141,6 +141,59 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	/**
+	 * Build thank-you shortcode placeholders from a verified WC_Order.
+	 *
+	 * @param WC_Order $order       Order object.
+	 * @param string   $date_format Date format string.
+	 * @return array
+	 */
+	protected function build_order_shortcodes( $order, $date_format = '' ) {
+		if ( ! $date_format ) {
+			$date_format = wc_date_format();
+		}
+		$shortcodes = array(
+			'order_number'                => $order->get_id(),
+			'order_status'                => $order->get_status(),
+			'order_date'                  => $order->get_date_created() ? $order->get_date_created()->date_i18n( $date_format ) : '',
+			'order_total'                 => $order->get_formatted_order_total(),
+			'order_subtotal'              => $order->get_subtotal_to_display(),
+			'order_transaction_id'        => $order->get_transaction_id(),
+			'items_count'                 => $order->get_item_count(),
+			'payment_method'              => $order->get_payment_method_title(),
+			'shipping_method'             => $order->get_shipping_method(),
+			'shipping_address'            => $order->get_shipping_address_1(),
+			'full_shipping_address'       => WC()->countries->get_formatted_address( $order->get_address( 'shipping' ), ', ' ),
+			'formatted_shipping_address'  => $order->get_formatted_shipping_address(),
+			'billing_address'             => $order->get_billing_address_1(),
+			'full_billing_address'        => WC()->countries->get_formatted_address( $order->get_address( 'billing' ), ', ' ),
+			'formatted_billing_address'   => $order->get_formatted_billing_address(),
+			'billing_country'             => $order->get_billing_country(),
+			'billing_city'                => $order->get_billing_city(),
+			'billing_first_name'          => ucwords( $order->get_billing_first_name() ),
+			'billing_last_name'           => ucwords( $order->get_billing_last_name() ),
+			'formatted_billing_full_name' => ucwords( $order->get_formatted_billing_full_name() ),
+			'billing_email'               => $order->get_billing_email(),
+			'shop_title'                  => get_bloginfo(),
+			'home_url'                    => home_url(),
+			'shop_url'                    => get_option( 'woocommerce_shop_page_id', '' ) ? get_page_link( get_option( 'woocommerce_shop_page_id' ) ) : '',
+		);
+		$country       = new WC_Countries();
+		$store_address = $country->get_base_address() ? $country->get_base_address() : $country->get_base_address_2();
+		if ( $country->get_base_city() ) {
+			$store_address .= ', ' . $country->get_base_city();
+		}
+		if ( $country->get_base_state() ) {
+			$store_address .= ', ' . $country->get_base_state();
+		}
+		if ( $country->get_base_country() ) {
+			$store_address .= ', ' . $country->get_base_country();
+		}
+		$shortcodes['store_address'] = $store_address;
+
+		return $shortcodes;
+	}
+
+	/**
 	 * Whether the current request may access order details (mirrors WooCommerce thank-you checks).
 	 *
 	 * @param mixed $order Order object.
@@ -158,7 +211,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 		$order_key = $this->key;
 		if ( ! $order_key ) {
-			$order_key = empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$order_key = empty( $_GET['key'] ) ? '' : sanitize_text_field( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
 		if ( ! $order_key || ! hash_equals( $order->get_order_key(), $order_key ) ) {
@@ -184,12 +237,12 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 	public function send_email_action() {
 		check_ajax_referer( 'viwtp_send_email_ajax_nonce', 'nonce' );
-		$shortcodes   = isset( $_POST['shortcodes'] ) && is_array( $_POST['shortcodes'] )
+		$posted_shortcodes = isset( $_POST['shortcodes'] ) && is_array( $_POST['shortcodes'] )
 			? map_deep( wp_unslash( $_POST['shortcodes'] ), 'sanitize_text_field' )
 			: array();
 		$coupon_code  = isset( $_POST['coupon_code'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) : '';
-		$order_key    = isset( $_POST['order_key'] ) ? wc_clean( wp_unslash( $_POST['order_key'] ) ) : '';
-		$order_id     = isset( $shortcodes['order_number'] ) ? absint( $shortcodes['order_number'] ) : 0;
+		$order_key    = isset( $_POST['order_key'] ) ? sanitize_text_field( wp_unslash( $_POST['order_key'] ) ) : '';
+		$order_id     = isset( $posted_shortcodes['order_number'] ) ? absint( $posted_shortcodes['order_number'] ) : 0;
 		$message_fail = esc_html__( 'There was problem sending email but you can always view your coupon gift by going to Account settings/Orders', 'woo-thank-you-page-customizer' );
 		$date_format  = wc_date_format();
 		$order        = $order_id ? wc_get_order( $order_id ) : false;
@@ -201,6 +254,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 			);
 			die;
 		}
+		$shortcodes    = $this->build_order_shortcodes( $order, $date_format );
 		$stored_coupon = $order->get_meta( 'woo_thank_you_page_coupon_code', true );
 		$email         = $order->get_billing_email();
 		$in_norm       = function_exists( 'wc_format_coupon_code' ) ? strtoupper( wc_format_coupon_code( $coupon_code ) ) : strtoupper( trim( $coupon_code ) );
@@ -221,8 +275,11 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						$coupon_amount = $this->wc_price( $coupon->get_amount() );
 					}
 					$coupon_date_expires = $coupon->get_date_expires();
-					$last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( $date_format, strtotime( $coupon_date_expires ) - 86400 );
-					$coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( $coupon_date_expires ) );
+					$expires_ts          = ( $coupon_date_expires && is_object( $coupon_date_expires ) && method_exists( $coupon_date_expires, 'getTimestamp' ) )
+						? (int) $coupon_date_expires->getTimestamp()
+						: ( $coupon_date_expires ? strtotime( (string) $coupon_date_expires ) : 0 );
+					$last_valid_date     = $expires_ts ? date_i18n( $date_format, $expires_ts - 86400 ) : '';
+					$coupon_date_expires = $expires_ts ? date_i18n( $date_format, $expires_ts ) : esc_html__( 'never expires', 'woo-thank-you-page-customizer' );
 					$send                = $this->send_email( $email, $coupon->get_code(), $coupon_date_expires, $last_valid_date, $coupon_amount, $shortcodes, true );
 					if ( $send ) {
 						set_transient( 'woocommerce_thank_you_page_customizer_send_email_' . $order_id, time(), 86400 );
@@ -314,8 +371,11 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	public function select_order() {
-		check_ajax_referer('viwtp_ajax_customizer_nonce', '_ajax_nonce');
-		$order_id = isset( $_POST['order_id'] ) ? sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		check_ajax_referer( 'viwtp_ajax_customizer_nonce', '_ajax_nonce' );
+		if ( ! current_user_can( 'customize' ) ) {
+			wp_die( -1 );
+		}
+		$order_id = isset( $_POST['order_id'] ) ? absint( wp_unslash( $_POST['order_id'] ) ) : 0;// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( $order_id ) {
 			$order = wc_get_order( $order_id );
 			if ( $order ) {
@@ -330,18 +390,24 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	public function apply_layout() {
 		check_ajax_referer( 'viwtp_ajax_nonce', 'nonce' );
 		$this->is_customize_preview = true;
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
+		if ( ! current_user_can( 'customize' ) && ! current_user_can( 'manage_options' ) ) {
+			wp_die( -1 );
 		}
-		$order_id                  = isset( $_POST['order_id'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$change_url                = isset( $_POST['change_url'] ) ? sanitize_text_field( wp_unslash( $_POST['change_url'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$this->payment_method_html = isset( $_POST['payment_method_html'] ) ? wp_kses_post( base64_decode( wp_unslash( $_POST['payment_method_html'] ) ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$this->google_map_address  = isset( $_POST['google_map_address'] ) ? wp_kses_post( base64_decode( wp_unslash( $_POST['google_map_address'] ) ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$order_id   = isset( $_POST['order_id'] ) ? absint( wp_unslash( $_POST['order_id'] ) ) : 0;// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$change_url = isset( $_POST['change_url'] ) ? sanitize_text_field( wp_unslash( $_POST['change_url'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+		$payment_method_html_raw = isset( $_POST['payment_method_html'] ) ? wp_unslash( $_POST['payment_method_html'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$google_map_address_raw  = isset( $_POST['google_map_address'] ) ? wp_unslash( $_POST['google_map_address'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$payment_method_html_raw = is_string( $payment_method_html_raw ) ? preg_replace( '/[^A-Za-z0-9+\/=]/', '', $payment_method_html_raw ) : '';
+		$google_map_address_raw  = is_string( $google_map_address_raw ) ? preg_replace( '/[^A-Za-z0-9+\/=]/', '', $google_map_address_raw ) : '';
+		$this->payment_method_html = $payment_method_html_raw !== '' ? wp_kses_post( (string) base64_decode( $payment_method_html_raw, true ) ) : '';
+		$this->google_map_address  = $google_map_address_raw !== '' ? wp_kses_post( (string) base64_decode( $google_map_address_raw, true ) ) : '';
+
 		if ( $change_url && $order_id ) {
 			$order_received_url = '';
 			$order              = wc_get_order( $order_id );
 			if ( $order ) {
-				$data                   = new VI_WOO_THANK_YOU_PAGE_DATA();
+				$data                   = new WTYPC_DATA();
 				$option                 = $data->get_params();
 				$option['select_order'] = $order->get_id();
 				update_option( 'woo_thank_you_page_params', $option );
@@ -401,18 +467,25 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 					'state'     => $country->get_base_state(),
 					'country'   => $country->get_base_country(),
 				), ', ' );
-				$shortcodes['store_address']    = ucwords( $store_address );
-				$blocks                         = isset( $_POST['block'] ) ? json_decode( sanitize_text_field( stripslashes( $_POST['block'] ) ) ) : array();// phpcs:ignore WordPress.Security.NonceVerification.Missing
-				$text_editor                    = isset( $_POST['text_editor'] ) ? json_decode( sanitize_text_field( stripslashes( $_POST['text_editor'] ) ), true ) : array();// phpcs:ignore WordPress.Security.NonceVerification.Missing
-				$meta                           = array(
-					'order_confirmation_header'               => isset( $_POST['order_confirmation_header'] ) ? sanitize_text_field( $_POST['order_confirmation_header'] ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'order_details_header'                    => isset( $_POST['order_details_header'] ) ? sanitize_text_field( $_POST['order_details_header'] ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'order_details_product_image'             => isset( $_POST['order_details_product_image'] ) ? sanitize_text_field( $_POST['order_details_product_image'] ) : false,// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'order_details_product_quantity_in_image' => isset( $_POST['order_details_product_quantity_in_image'] ) ? sanitize_text_field( $_POST['order_details_product_quantity_in_image'] ) : true,// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'customer_information_header'             => isset( $_POST['customer_information_header'] ) ? sanitize_text_field( $_POST['customer_information_header'] ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'thank_you_message_header'                => isset( $_POST['thank_you_message_header'] ) ? sanitize_text_field( $_POST['thank_you_message_header'] ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'thank_you_message_message'               => isset( $_POST['thank_you_message_message'] ) ? sanitize_text_field( $_POST['thank_you_message_message'] ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
-					'social_icons'                            => isset( $_POST['social_icons'] ) ? array_map( 'sanitize_text_field', array_map( 'stripslashes', $_POST['social_icons'] ) ) : array(),// phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$shortcodes['store_address'] = ucwords( $store_address );
+				$block_raw                   = isset( $_POST['block'] ) ? wp_unslash( $_POST['block'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$text_editor_raw             = isset( $_POST['text_editor'] ) ? wp_unslash( $_POST['text_editor'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$blocks                      = is_string( $block_raw ) && $block_raw !== '' ? json_decode( $block_raw ) : array();
+				$text_editor                 = is_string( $text_editor_raw ) && $text_editor_raw !== '' ? json_decode( $text_editor_raw, true ) : array();
+				if ( ! is_array( $text_editor ) ) {
+					$text_editor = array();
+				} else {
+					$text_editor = map_deep( $text_editor, 'wp_kses_post' );
+				}
+				$meta = array(
+					'order_confirmation_header'               => isset( $_POST['order_confirmation_header'] ) ? sanitize_text_field( wp_unslash( $_POST['order_confirmation_header'] ) ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'order_details_header'                    => isset( $_POST['order_details_header'] ) ? sanitize_text_field( wp_unslash( $_POST['order_details_header'] ) ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'order_details_product_image'             => isset( $_POST['order_details_product_image'] ) ? sanitize_text_field( wp_unslash( $_POST['order_details_product_image'] ) ) : false,// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'order_details_product_quantity_in_image' => isset( $_POST['order_details_product_quantity_in_image'] ) ? sanitize_text_field( wp_unslash( $_POST['order_details_product_quantity_in_image'] ) ) : true,// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'customer_information_header'             => isset( $_POST['customer_information_header'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_information_header'] ) ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'thank_you_message_header'                => isset( $_POST['thank_you_message_header'] ) ? sanitize_text_field( wp_unslash( $_POST['thank_you_message_header'] ) ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'thank_you_message_message'               => isset( $_POST['thank_you_message_message'] ) ? sanitize_text_field( wp_unslash( $_POST['thank_you_message_message'] ) ) : '',// phpcs:ignore WordPress.Security.NonceVerification.Missing
+					'social_icons'                            => isset( $_POST['social_icons'] ) ? map_deep( wp_unslash( $_POST['social_icons'] ), 'sanitize_text_field' ) : array(),// phpcs:ignore WordPress.Security.NonceVerification.Missing
 				);
 				wp_send_json( array(
 					'blocks'     => $this->get_content( $blocks, $order, $text_editor, $meta, $shortcodes ),
@@ -428,22 +501,23 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 			return;
 		}
 		$google_map_api = $this->get_params( 'google_map_api' );
-		if ( $google_map_api && $this->include_google_api === null ) {
-			$this->include_google_api = 1;
-			if ( $this->is_customize_preview ) {
-				?>
-                <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr( $google_map_api ) ?>">
-                </script>
-				<?php
-			} else if ( in_array( 'google_map', $this->active_components ) ) {
-				?>
-                <script async src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr( $google_map_api ) ?>">
-                </script>
-				<?php
-			}
-
+		if ( ! $google_map_api || null !== $this->include_google_api ) {
+			return;
 		}
+		$should_load = $this->is_customize_preview || ( is_array( $this->active_components ) && in_array( 'google_map', $this->active_components, true ) );
+		if ( ! $should_load ) {
+			return;
+		}
+		$this->include_google_api = 1;
+		$maps_url                 = add_query_arg(
+			array(
+				'key' => rawurlencode( $google_map_api ),
+			),
+			'https://maps.googleapis.com/maps/api/js'
+		);
+		wp_enqueue_script( 'woo-thank-you-page-google-maps-api', $maps_url, array(), WTYPC_VERSION, true );
+		wp_script_add_data( 'woo-thank-you-page-google-maps-api', 'async', true );
+		wp_script_add_data( 'woo-thank-you-page-google-maps-api', 'defer', true );
 	}
 
 	public function get_active_components( $value, $key ) {
@@ -457,7 +531,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 		if ( is_checkout() && ! empty( $wp->query_vars['order-received'] ) ) {
 			$this->order_id = absint( $wp->query_vars['order-received'] );
-			$this->key      = empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$this->key      = empty( $_GET['key'] ) ? '' : sanitize_text_field( wp_unslash( $_GET['key'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		} else {
 			return;
 		}
@@ -502,10 +576,10 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		if ( is_customize_preview() && ! empty( $_REQUEST['customize_messenger_channel'] ) ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
 			$this->is_customize_preview = true;
 			$src_min = WP_DEBUG ? '' : '.min';
-			wp_enqueue_style( 'woocommerce-thank-you-page-style', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-style', WTYPC_CSS . 'woocommerce-thank-you-page' . $src_min . '.css', array(), WTYPC_VERSION );
 			wp_enqueue_media();
-			wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', WTYPC_CSS . 'social_icons' . $src_min . '.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-icons', WTYPC_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), WTYPC_VERSION );
 			$google_map_address = $this->get_params( 'google_map_address' );
 			if ( $order ) {
 				$billing_address = $order->get_billing_address_1();
@@ -579,7 +653,15 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						$google_map_address = str_replace( '{shipping_address}', $shipping_address, $google_map_address );
 						$google_map_address = str_replace( '{store_address}', $store_address, $google_map_address );
 						$src_min = WP_DEBUG ? '' : '.min';
-						wp_enqueue_script( 'woocommerce-thank-you-page-google-map-script', VI_WOO_THANK_YOU_PAGE_JS . 'woocommerce-thank-you-page-google-map' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+						$maps_url = add_query_arg(
+							array(
+								'key' => rawurlencode( $this->get_params( 'google_map_api' ) ),
+							),
+							'https://maps.googleapis.com/maps/api/js'
+						);
+						wp_enqueue_script( 'woo-thank-you-page-google-maps-api', $maps_url, array(), WTYPC_VERSION, true );
+						$this->include_google_api = 1;
+						wp_enqueue_script( 'woocommerce-thank-you-page-google-map-script', WTYPC_JS . 'woocommerce-thank-you-page-google-map' . $src_min . '.js', array( 'jquery', 'woo-thank-you-page-google-maps-api' ), WTYPC_VERSION, true );
 						wp_localize_script( 'woocommerce-thank-you-page-google-map-script', 'woo_thank_you_page_front_end_params', array(
 							'google_map_zoom_level' => $this->get_params( 'google_map_zoom_level' ),
 							'google_map_label'      => str_replace( array(
@@ -594,7 +676,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 								$billing_address
 							), nl2br( $this->get_params( 'google_map_label' ) ) ),
 							'google_map_address'    => $google_map_address,
-							'google_map_marker'     => VI_WOO_THANK_YOU_PAGE_MARKERS . $this->get_params( 'google_map_marker' ) . '.png'
+							'google_map_marker'     => WTYPC_MARKERS . $this->get_params( 'google_map_marker' ) . '.png'
 						) );
 						$this->google_map_address = $google_map_address;
 					}
@@ -1048,15 +1130,15 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 				/*custom css*/
 				$css .= $this->get_params( 'custom_css' );
 				$src_min = WP_DEBUG ? '' : '.min';
-				wp_enqueue_style( 'woocommerce-thank-you-page-style', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-style', WTYPC_CSS . 'woocommerce-thank-you-page' . $src_min . '.css', array(), WTYPC_VERSION );
 				wp_add_inline_style( 'woocommerce-thank-you-page-style', $css );
-				wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-				wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', WTYPC_CSS . 'social_icons' . $src_min . '.css', array(), WTYPC_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-icons', WTYPC_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), WTYPC_VERSION );
 
 			}
 		}
 		$src_min = WP_DEBUG ? '' : '.min';
-		wp_enqueue_script( 'woocommerce-thank-you-page-script', VI_WOO_THANK_YOU_PAGE_JS . 'woocommerce-thank-you-page' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+		wp_enqueue_script( 'woocommerce-thank-you-page-script', WTYPC_JS . 'woocommerce-thank-you-page' . $src_min . '.js', array( 'jquery' ), WTYPC_VERSION, true );
 		wp_localize_script( 'woocommerce-thank-you-page-script', 'woocommerce_thank_you_page_customizer_params', array(
 			'url'            => admin_url( 'admin-ajax.php' ),
 			'action'         => 'woocommerce_thank_you_page_customizer_send_email',
@@ -1096,7 +1178,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		if ( ! $this->is_customize_preview ) {
 			return;
 		}
-		wp_enqueue_style( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_CSS . 'admin-style.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+		wp_enqueue_style( 'woocommerce-thank-you-page-admin', WTYPC_CSS . 'admin-style.css', array(), WTYPC_VERSION );
 
 		$shortcode_titles = array(
 			'coupon_code'         => esc_html__( 'Coupon code', 'woo-thank-you-page-customizer' ),
@@ -1199,41 +1281,46 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 	}
 
 	public function wc_price( $price, $args = array() ) {
-		extract(
-			apply_filters(
-				'wc_price_args', wp_parse_args(
-					$args, array(
-						'ex_tax_label'       => false,
-						'currency'           => get_option( 'woocommerce_currency' ),
-						'decimal_separator'  => get_option( 'woocommerce_price_decimal_sep' ),
-						'thousand_separator' => get_option( 'woocommerce_price_thousand_sep' ),
-						'decimals'           => get_option( 'woocommerce_price_num_decimals', 2 ),
-						'price_format'       => get_woocommerce_price_format(),
-					)
+		$args = apply_filters(
+			'wc_price_args', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			wp_parse_args(
+				$args,
+				array(
+					'ex_tax_label'       => false,
+					'currency'           => get_option( 'woocommerce_currency' ),
+					'decimal_separator'  => get_option( 'woocommerce_price_decimal_sep' ),
+					'thousand_separator' => get_option( 'woocommerce_price_thousand_sep' ),
+					'decimals'           => get_option( 'woocommerce_price_num_decimals', 2 ),
+					'price_format'       => get_woocommerce_price_format(),
 				)
 			)
 		);
-		$currency_pos = get_option( 'woocommerce_currency_pos' );
-		$price_format = '%1$s%2$s';
+
+		$currency           = isset( $args['currency'] ) ? $args['currency'] : get_option( 'woocommerce_currency' );
+		$decimal_separator  = isset( $args['decimal_separator'] ) ? $args['decimal_separator'] : '.';
+		$thousand_separator = isset( $args['thousand_separator'] ) ? $args['thousand_separator'] : ',';
+		$decimals           = isset( $args['decimals'] ) ? (int) $args['decimals'] : 2;
+		$currency_pos       = get_option( 'woocommerce_currency_pos' );
+		$price_format       = '%1$s%2$s';
 
 		switch ( $currency_pos ) {
-			case 'left' :
+			case 'left':
 				$price_format = '%1$s%2$s';
 				break;
-			case 'right' :
+			case 'right':
 				$price_format = '%2$s%1$s';
 				break;
-			case 'left_space' :
+			case 'left_space':
 				$price_format = '%1$s&nbsp;%2$s';
 				break;
-			case 'right_space' :
+			case 'right_space':
 				$price_format = '%2$s&nbsp;%1$s';
 				break;
 		}
 
 		$negative = $price < 0;
-		$price    = apply_filters( 'raw_woocommerce_price', floatval( $negative ? $price * - 1 : $price ) );
-		$price    = apply_filters( 'formatted_woocommerce_price', number_format( $price, $decimals, $decimal_separator, $thousand_separator ), $price, $decimals, $decimal_separator, $thousand_separator );
+		$price    = apply_filters( 'raw_woocommerce_price', floatval( $negative ? $price * - 1 : $price ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		$price    = apply_filters( 'formatted_woocommerce_price', number_format( $price, $decimals, $decimal_separator, $thousand_separator ), $price, $decimals, $decimal_separator, $thousand_separator ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 		if ( apply_filters( 'woocommerce_price_trim_zeros', false ) && $decimals > 0 ) {
 			$price = wc_trim_zeros( $price );
@@ -1384,7 +1471,9 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 					break;
 				case 'unique':
 					$code = $this->create_code();
+					break;
 				default:
+					break;
 			}
 		}
 
@@ -1400,7 +1489,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 			$this->order_id = absint( $wp->query_vars['order-received'] );
 		}
 		if ( is_null( $this->key ) && isset( $_REQUEST['key'] ) ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
-			$this->key = wc_clean( $_REQUEST['key'] );// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
+			$this->key = sanitize_text_field( wp_unslash( $_REQUEST['key'] ) );// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.NonceVerification.Recommended
 		}
 		if ( ! $this->is_customize_preview ) {
 			return $content;
@@ -1621,7 +1710,8 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 		$tiktok_html = ob_get_clean();
 		$html         .= '<li style="' . ( ! $tiktok_url ? 'display:none' : '' ) . '" class="wtyp-tiktok-follow">' . $tiktok_html . '</li>';
 
-		$html = apply_filters( 'wtyp_after_socials_html', $html );
+		$html = apply_filters( 'wtypc_after_socials_html', $html );
+		$html = apply_filters( 'wtyp_after_socials_html', $html ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$html .= '</ul></div>';
 
 		return $html;
@@ -1662,9 +1752,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 
 	private function order_again( $order ) {
 		ob_start();
-		if ( function_exists( 'woocommerce_order_again_button' ) ) {
-			woocommerce_order_again_button( $order );
-		}
+		WTYPC_Functions::render_order_again_button( $order );
 
 		return ob_get_clean();
 	}
@@ -1686,8 +1774,11 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 						$this->coupon_amount = $this->wc_price( $coupon->get_amount() );
 					}
 					$coupon_date_expires       = $coupon->get_date_expires();
-					$this->last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( $date_format, strtotime( $coupon_date_expires ) - 86400 );
-					$this->coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( $coupon_date_expires ) );
+					$expires_ts                = ( $coupon_date_expires && is_object( $coupon_date_expires ) && method_exists( $coupon_date_expires, 'getTimestamp' ) )
+						? (int) $coupon_date_expires->getTimestamp()
+						: ( $coupon_date_expires ? strtotime( (string) $coupon_date_expires ) : 0 );
+					$this->last_valid_date     = $expires_ts ? date_i18n( $date_format, $expires_ts - 86400 ) : '';
+					$this->coupon_date_expires = $expires_ts ? date_i18n( $date_format, $expires_ts ) : esc_html__( 'never expires', 'woo-thank-you-page-customizer' );
 					$coupon_message            = str_replace( '{coupon_code}', $this->coupon_code, $coupon_message );
 					$coupon_message            = str_replace( '{coupon_amount}', $this->coupon_amount, $coupon_message );
 					$coupon_message            = str_replace( '{last_valid_date}', $this->last_valid_date, $coupon_message );
@@ -1699,9 +1790,10 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 				} else {
 					$this->coupon_amount = $this->wc_price( $this->get_params( 'coupon_unique_amount' )[0] );
 				}
-				$coupon_date_expires       = $this->get_params( 'coupon_unique_date_expires' )[0];
-				$this->last_valid_date     = empty( $coupon_date_expires ) ? '' : date_i18n( $date_format, strtotime( date_i18n( $date_format ) ) + $coupon_date_expires * 86400 );
-				$this->coupon_date_expires = empty( $coupon_date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( date_i18n( $date_format ) ) + ( $coupon_date_expires + 1 ) * 86400 );
+				$days                      = absint( $this->get_params( 'coupon_unique_date_expires' )[0] );
+				$now                       = (int) current_time( 'timestamp' );
+				$this->last_valid_date     = $days ? date_i18n( $date_format, $now + $days * 86400 ) : '';
+				$this->coupon_date_expires = $days ? date_i18n( $date_format, $now + ( $days + 1 ) * 86400 ) : esc_html__( 'never expires', 'woo-thank-you-page-customizer' );
 				$coupon_message            = str_replace( '{coupon_code}', $this->coupon_code, $coupon_message );
 				$coupon_message            = str_replace( '{coupon_amount}', $this->coupon_amount, $coupon_message );
 				$coupon_message            = str_replace( '{last_valid_date}', $this->last_valid_date, $coupon_message );
@@ -1950,7 +2042,7 @@ class VI_WOO_THANK_YOU_PAGE_Frontend_Frontend {
 								$product_image_src = wp_get_attachment_thumb_url( $product->get_image_id() );
 								$alt               = get_post_meta( $product->get_id(), '_wp_attachment_image_alt', true );
 							}
-							echo wp_kses_post( apply_filters( 'woo_thank_you_page_order_item_image', $product_permalink ? sprintf( '<div class="%s"><a href="%s" class="%s"><img class="%s" src="%s" alt="%s"></a></div>', ( $order_details_product_image ? $this->set( array(
+							echo wp_kses_post( apply_filters( 'woo_thank_you_page_order_item_image', $product_permalink ? sprintf( '<div class="%s"><a href="%s" class="%s"><img class="%s" src="%s" alt="%s"></a></div>', ( $order_details_product_image ? $this->set( array( // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 								'order-item-image-container',
 								'active'
 							) ) : $this->set( 'order-item-image-container' ) ), $product_permalink, $this->set( 'order-item-image-wrap' ), $this->set( 'order-item-image' ), $product_image_src, $alt ? $alt : $item->get_name() ) : $item->get_name(), $item, $is_visible ) );

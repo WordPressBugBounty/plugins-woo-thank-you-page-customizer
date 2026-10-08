@@ -1,5 +1,9 @@
 *** Thanko Thank You Page Customizer for WooCommerce Changelog ***
 
+2026.10.08 - version 1.2.4
+- Fixed: Escape order placeholder values before substituting into thank you page Text Editor and message content to prevent shortcode injection
+- Updated: Compatible WooCommerce 11.2
+
 2026.09.17 - version 1.2.3
 - Fixed: Prevent order customer data from being exposed on thank you page without a valid order key
 

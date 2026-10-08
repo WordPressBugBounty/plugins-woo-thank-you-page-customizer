@@ -6,8 +6,8 @@ if ( ! class_exists( 'WP_Customize_Control' ) ) {
 	require_once ABSPATH . 'wp-includes/class-wp-customize-control.php';
 }
 if ( class_exists( 'WP_Customize_Control' ) ):
-	if ( ! class_exists( 'WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control' ) ) {
-		class WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control extends WP_Customize_Control {
+	if ( ! class_exists( 'WTYPC_Radio_Icons_Control' ) ) {
+		class WTYPC_Radio_Icons_Control extends WP_Customize_Control {
 			public $type = 'wtyp_radio_icons';
 
 			public function render_content() {
@@ -50,13 +50,13 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 
 			public function enqueue() {
 				$src_min = WP_DEBUG ? '' : '.min';
-				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-social-icons', VI_WOO_THANK_YOU_PAGE_JS . 'custom-control-social-icons' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-social-icons-css', VI_WOO_THANK_YOU_PAGE_CSS . 'custom-control-social-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-social-icons', WTYPC_JS . 'custom-control-social-icons' . $src_min . '.js', array( 'jquery' ), WTYPC_VERSION, true );
+				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-social-icons-css', WTYPC_CSS . 'custom-control-social-icons' . $src_min . '.css', array(), WTYPC_VERSION );
 			}
 		}
 	}
-	if ( ! class_exists( 'WOO_THANK_YOU_PAGE_CUSTOMIZER_Blocks_Control' ) ) {
-		class WOO_THANK_YOU_PAGE_CUSTOMIZER_Blocks_Control extends WP_Customize_Control {
+	if ( ! class_exists( 'WTYPC_Blocks_Control' ) ) {
+		class WTYPC_Blocks_Control extends WP_Customize_Control {
 			public $type = 'wtyp_block';
 
 			public function render_content() {
@@ -313,12 +313,12 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 
 			public function enqueue() {
 				$src_min = WP_DEBUG ? '' : '.min';
-				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-blocks-js', VI_WOO_THANK_YOU_PAGE_JS . 'custom-control-blocks' . $src_min . '.js', array(
+				wp_enqueue_script( 'woocommerce-thank-you-page-custom-controls-blocks-js', WTYPC_JS . 'custom-control-blocks' . $src_min . '.js', array(
 					'jquery',
 					'jquery-ui-sortable',
 					'jquery-ui-draggable',
 					'jquery-ui-droppable',
-				), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+				), WTYPC_VERSION, true );
 				$rows = array(
 					1 => '',
 					2 => '',
@@ -366,13 +366,13 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 						'rows' => $rows
 					)
 				);
-				wp_enqueue_style( 'woocommerce-thank-you-page-icons-css', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-blocks-css', VI_WOO_THANK_YOU_PAGE_CSS . 'custom-control-blocks' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-icons-css', WTYPC_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), WTYPC_VERSION );
+				wp_enqueue_style( 'woocommerce-thank-you-page-custom-controls-blocks-css', WTYPC_CSS . 'custom-control-blocks' . $src_min . '.css', array(), WTYPC_VERSION );
 			}
 		}
 	}
-	if ( ! class_exists( 'WOO_THANK_YOU_PAGE_CUSTOMIZER_Text_Editor_Control' ) ) {
-		class WOO_THANK_YOU_PAGE_CUSTOMIZER_Text_Editor_Control extends WP_Customize_Control {
+	if ( ! class_exists( 'WTYPC_Text_Editor_Control' ) ) {
+		class WTYPC_Text_Editor_Control extends WP_Customize_Control {
 			public $type = 'wtyp_text_editor';
 
 			public function render_content() {
@@ -395,7 +395,7 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 		}
 	}
 
-	if ( ! class_exists( 'WOO_THANK_YOU_PAGE_CUSTOMIZER_Image_Radio_Button_Custom_Control' ) ) {
+	if ( ! class_exists( 'WTYPC_Image_Radio_Button_Custom_Control' ) ) {
 		/**
 		 * Image Radio Button Custom Control
 		 *
@@ -403,7 +403,7 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 		 * @license http://www.gnu.org/licenses/gpl-2.0.html
 		 * @link https://github.com/maddisondesigns
 		 */
-		class WOO_THANK_YOU_PAGE_CUSTOMIZER_Image_Radio_Button_Custom_Control extends WP_Customize_Control {
+		class WTYPC_Image_Radio_Button_Custom_Control extends WP_Customize_Control {
 			/**
 			 * The type of control being rendered
 			 */
@@ -414,7 +414,7 @@ if ( class_exists( 'WP_Customize_Control' ) ):
 			 */
 			public function enqueue() {
 				$src_min = WP_DEBUG ? '' : '.min';
-				wp_enqueue_style( 'woocommerce-thank-you-page-customizer-custom-controls-radio-image-css', VI_WOO_THANK_YOU_PAGE_CSS . 'customizer-radio-image' . $src_min . '.css', array(), '1.0', 'all' );
+				wp_enqueue_style( 'woocommerce-thank-you-page-customizer-custom-controls-radio-image-css', WTYPC_CSS . 'customizer-radio-image' . $src_min . '.css', array(), '1.0', 'all' );
 			}
 
 			/**

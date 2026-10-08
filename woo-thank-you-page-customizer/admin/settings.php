@@ -1,6 +1,6 @@
 <?php
 /*
-Class Name: VI_WOO_THANK_YOU_PAGE_Admin_Settings
+Class Name: WTYPC_Admin_Settings
 Author: Andy Ha (support@villatheme.com)
 Author URI: http://villatheme.com
 Copyright 2018 villatheme.com. All rights reserved.
@@ -9,13 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
+class WTYPC_Admin_Settings {
 	protected $settings;
 	protected $prefix;
 
 	public function __construct() {
 
-		$this->settings = new VI_WOO_THANK_YOU_PAGE_DATA();
+		$this->settings = new WTYPC_DATA();
 		$this->prefix   = 'woocommerce-thank-you-page-';
 		add_filter(
 			'plugin_action_links_woo-thank-you-page-customizer/woo-thank-you-page-customizer.php', array(
@@ -40,7 +40,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 	function preview_emails_html() {
 		global $pagenow;
-		if ( $pagenow == 'admin.php' && isset( $_REQUEST['page'] ) && wp_unslash( sanitize_text_field( $_REQUEST['page'] ) ) === 'woo_thank_you_page_customizer' ) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( $pagenow == 'admin.php' && isset( $_REQUEST['page'] ) && sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) === 'woo_thank_you_page_customizer' ) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			?>
             <div class="preview-emails-html-container preview-html-hidden">
                 <div class="preview-emails-html-overlay"></div>
@@ -52,7 +52,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 	public function preview_emails_button( $editor_id ) {
 		global $pagenow;
-		if ( $pagenow == 'admin.php' && isset( $_REQUEST['page'] ) && wp_unslash( sanitize_text_field( $_REQUEST['page'] ) ) == 'woo_thank_you_page_customizer' ) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( $pagenow == 'admin.php' && isset( $_REQUEST['page'] ) && sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) == 'woo_thank_you_page_customizer' ) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$editor_ids = array( 'coupon_email_content' );
 //			if ( count( $this->languages ) ) {
 //				foreach ( $this->languages as $key => $value ) {
@@ -237,7 +237,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 		if ( ! $keyword ) {
-			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
+			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '';
 		}
 		if ( empty( $keyword ) ) {
 			die();
@@ -353,7 +353,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 
 		$keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
 		if ( ! $keyword ) {
-			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
+			$keyword = isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '';
 		}
 		if ( empty( $keyword ) ) {
 			die();
@@ -391,11 +391,11 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 		add_menu_page( 'Thank You Page Customizer for WooCommerce', 'Thank You Page', 'manage_options', 'woo_thank_you_page_customizer', array(
 			$this,
 			'settings_callback'
-		), VI_WOO_THANK_YOU_PAGE_IMAGES . 'thank-you.png', 2 );
+		), WTYPC_IMAGES . 'thank-you.png', 2 );
 	}
 
 	public function settings_callback() {
-		$this->settings = new VI_WOO_THANK_YOU_PAGE_DATA();
+		$this->settings = new WTYPC_DATA();
 		?>
         <div class="wrap">
             <h2><?php echo esc_html__( 'Thank You Page Customizer for WooCommerce', 'woo-thank-you-page-customizer' ); ?></h2>
@@ -955,7 +955,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
         </div>
 		<?php
 
-		do_action( 'villatheme_support_woo-thank-you-page-customizer' );
+		do_action( 'villatheme_support_woo-thank-you-page-customizer' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 
 	private function set( $name ) {
@@ -969,7 +969,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 	}
 
 	public function admin_enqueue_script() {
-		$page = isset( $_REQUEST['page'] ) ? wp_unslash( sanitize_text_field( $_REQUEST['page'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( $page == 'woo_thank_you_page_customizer' ) {
 			global $wp_scripts;
 			$scripts = $wp_scripts->registered;
@@ -981,19 +981,19 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 			}
 			$src_min = WP_DEBUG ? '' : '.min';
 			// style
-			wp_enqueue_style( 'woocommerce-thank-you-page-form', VI_WOO_THANK_YOU_PAGE_CSS . 'form.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-button', VI_WOO_THANK_YOU_PAGE_CSS . 'button.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-icon', VI_WOO_THANK_YOU_PAGE_CSS . 'icon.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-dropdown', VI_WOO_THANK_YOU_PAGE_CSS . 'dropdown.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-checkbox', VI_WOO_THANK_YOU_PAGE_CSS . 'checkbox.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-transition', VI_WOO_THANK_YOU_PAGE_CSS . 'transition.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-tab', VI_WOO_THANK_YOU_PAGE_CSS . 'tab.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-segment', VI_WOO_THANK_YOU_PAGE_CSS . 'segment.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-menu', VI_WOO_THANK_YOU_PAGE_CSS . 'menu.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-select2', VI_WOO_THANK_YOU_PAGE_CSS . 'select2.min.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_CSS . 'admin-style' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-			wp_enqueue_style( 'woocommerce-coupon-villatheme-support', VI_WOO_THANK_YOU_PAGE_CSS . 'villatheme-support' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-form', WTYPC_CSS . 'form.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-button', WTYPC_CSS . 'button.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-icon', WTYPC_CSS . 'icon.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-dropdown', WTYPC_CSS . 'dropdown.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-checkbox', WTYPC_CSS . 'checkbox.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-transition', WTYPC_CSS . 'transition.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-tab', WTYPC_CSS . 'tab.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-segment', WTYPC_CSS . 'segment.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-menu', WTYPC_CSS . 'menu.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-select2', WTYPC_CSS . 'select2.min.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-icons', WTYPC_CSS . 'woocommerce-thank-you-page-icons' . $src_min . '.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-thank-you-page-admin', WTYPC_CSS . 'admin-style' . $src_min . '.css', array(), WTYPC_VERSION );
+			wp_enqueue_style( 'woocommerce-coupon-villatheme-support', WTYPC_CSS . 'villatheme-support' . $src_min . '.css', array(), WTYPC_VERSION );
 			$css = '.woo-thank-you-page-customizer-coupon-input{line-height:46px;display:block;text-align: center;font-size: 24px;width: 100%;height: 46px;vertical-align: middle;margin: 0;color:' . $this->settings->get_params( 'coupon_code_color' ) . ';background-color:' . $this->settings->get_params( 'coupon_code_bg_color' ) . ';border-width:' . $this->settings->get_params( 'coupon_code_border_width' ) . 'px;border-style:' . $this->settings->get_params( 'coupon_code_border_style' ) . ';border-color:' . $this->settings->get_params( 'coupon_code_border_color' ) . ';}';
 			wp_add_inline_style( 'woocommerce-thank-you-page-admin', $css );
 			//script
@@ -1003,17 +1003,17 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 				'jquery-ui-draggable',
 				'jquery-ui-slider',
 				'jquery-touch-punch'
-			), VI_WOO_THANK_YOU_PAGE_VERSION, true
+			), WTYPC_VERSION, true
 			);
 			wp_enqueue_script( 'jquery-ui-sortable' );// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion
-			wp_enqueue_script( 'woocommerce-thank-you-page-form', VI_WOO_THANK_YOU_PAGE_JS . 'form.min.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-checkbox', VI_WOO_THANK_YOU_PAGE_JS . 'checkbox.min.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-dropdown', VI_WOO_THANK_YOU_PAGE_JS . 'dropdown.min.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-transition', VI_WOO_THANK_YOU_PAGE_JS . 'transition.min.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-tab', VI_WOO_THANK_YOU_PAGE_JS . 'tab.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-address', VI_WOO_THANK_YOU_PAGE_JS . 'jquery.address-1.6.min.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-select2', VI_WOO_THANK_YOU_PAGE_JS . 'select2.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
-			wp_enqueue_script( 'woocommerce-thank-you-page-admin', VI_WOO_THANK_YOU_PAGE_JS . 'admin-script' . $src_min . '.js', array( 'jquery' ), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-form', WTYPC_JS . 'form.min.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-checkbox', WTYPC_JS . 'checkbox.min.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-dropdown', WTYPC_JS . 'dropdown.min.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-transition', WTYPC_JS . 'transition.min.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-tab', WTYPC_JS . 'tab.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-address', WTYPC_JS . 'jquery.address-1.6.min.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-select2', WTYPC_JS . 'select2.js', array( 'jquery' ), WTYPC_VERSION, true );
+			wp_enqueue_script( 'woocommerce-thank-you-page-admin', WTYPC_JS . 'admin-script' . $src_min . '.js', array( 'jquery' ), WTYPC_VERSION, true );
 			wp_localize_script( 'woocommerce-thank-you-page-admin', 'wtypc_params_admin', array(
 			        'url' => admin_url( 'admin-ajax.php' ),
 			        'ajax_nonce' => wp_create_nonce( 'viwtp_ajax_nonce' ),
@@ -1026,7 +1026,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		if ( ! isset( $_POST['_woo_thank_you_page_nonce'] ) || ! wp_verify_nonce( $_POST['_woo_thank_you_page_nonce'], 'woo_thank_you_page_action_nonce' ) ) {
+		if ( ! isset( $_POST['_woo_thank_you_page_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_woo_thank_you_page_nonce'] ) ), 'woo_thank_you_page_action_nonce' ) ) {
 			return;
 		}
 
@@ -1064,24 +1064,25 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Settings {
 				'coupon_unique_excluded_product_categories',
 				'coupon_unique_product_ids',
 				'coupon_unique_excluded_product_ids'
-			) ) ) {
-				$args[ $key ][0] = isset( $_POST[ $key ] ) ? array_map( 'sanitize_text_field', $_POST[ $key ] ) : '';
+			), true ) ) {
+				$posted          = isset( $_POST[ $key ] ) ? map_deep( wp_unslash( $_POST[ $key ] ), 'sanitize_text_field' ) : array();
+				$args[ $key ][0] = is_array( $posted ) ? $posted : array();
 
 			} else {
-				$args[ $key ][0] = isset( $_POST[ $key ] ) ? sanitize_text_field( stripslashes( $_POST[ $key ] ) ) : '';
+				$args[ $key ][0] = isset( $_POST[ $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) : '';
 			}
 		}
-		$args['enable']                   = isset( $_POST['enable'] ) ? sanitize_text_field( $_POST['enable'] ) : '';
-		$args['my_account_coupon_enable'] = isset( $_POST['my_account_coupon_enable'] ) ? sanitize_text_field( $_POST['my_account_coupon_enable'] ) : '';
-		$args['google_map_api']           = isset( $_POST['google_map_api'] ) ? sanitize_text_field( $_POST['google_map_api'] ) : '';
-		$args['order_status']             = isset( $_POST['order_status'] ) ? wc_clean( $_POST['order_status'] ) : array();
-		$args['coupon_email_send']        = isset( $_POST['coupon_email_send'] ) ? sanitize_text_field( $_POST['coupon_email_send'] ) : '';
-		$args['coupon_email_subject']     = isset( $_POST['coupon_email_subject'] ) ? sanitize_text_field( stripslashes( $_POST['coupon_email_subject'] ) ) : '';
-		$args['coupon_email_heading']     = isset( $_POST['coupon_email_heading'] ) ? sanitize_text_field( stripslashes( $_POST['coupon_email_heading'] ) ) : '';
-		$args['coupon_email_content']     = isset( $_POST['coupon_email_content'] ) ? wp_kses_post( stripslashes( $_POST['coupon_email_content'] ) ) : '';
+		$args['enable']                   = isset( $_POST['enable'] ) ? sanitize_text_field( wp_unslash( $_POST['enable'] ) ) : '';
+		$args['my_account_coupon_enable'] = isset( $_POST['my_account_coupon_enable'] ) ? sanitize_text_field( wp_unslash( $_POST['my_account_coupon_enable'] ) ) : '';
+		$args['google_map_api']           = isset( $_POST['google_map_api'] ) ? sanitize_text_field( wp_unslash( $_POST['google_map_api'] ) ) : '';
+		$args['order_status']             = isset( $_POST['order_status'] ) ? map_deep( wp_unslash( $_POST['order_status'] ), 'sanitize_text_field' ) : array();
+		$args['coupon_email_send']        = isset( $_POST['coupon_email_send'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_email_send'] ) ) : '';
+		$args['coupon_email_subject']     = isset( $_POST['coupon_email_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_email_subject'] ) ) : '';
+		$args['coupon_email_heading']     = isset( $_POST['coupon_email_heading'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_email_heading'] ) ) : '';
+		$args['coupon_email_content']     = isset( $_POST['coupon_email_content'] ) ? wp_kses_post( wp_unslash( $_POST['coupon_email_content'] ) ) : '';
 		$args['products']                 = wp_json_encode( array() );
 		$args                             = wp_parse_args( $args, get_option( 'woo_thank_you_page_params', $woo_thank_you_page_settings ) );
 		update_option( 'woo_thank_you_page_params', $args );
-		$woo_thank_you_page_settings = $args;
+		$woo_thank_you_page_settings = $args; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 	}
 }

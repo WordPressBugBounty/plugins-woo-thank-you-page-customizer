@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class VI_WOO_THANK_YOU_PAGE_DATA {
+class WTYPC_DATA {
 	private $params;
 	private $default;
 	/**
@@ -12,13 +12,13 @@ class VI_WOO_THANK_YOU_PAGE_DATA {
 	private string $prefix = 'woocommerce-thank-you-page-';
 
 	/**
-	 * VI_WOO_THANK_YOU_PAGE_DATA constructor.
+	 * WTYPC_DATA constructor.
 	 * Init setting
 	 */
 	public function __construct() {
 		global $woo_thank_you_page_settings;
 		if ( ! $woo_thank_you_page_settings ) {
-			$woo_thank_you_page_settings = get_option( 'woo_thank_you_page_params', array() );
+			$woo_thank_you_page_settings = get_option( 'woo_thank_you_page_params', array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 		}
 		$this->default = array(
 			'enable'                               => 0,
@@ -202,7 +202,7 @@ class VI_WOO_THANK_YOU_PAGE_DATA {
 			'google_map_marker'       => 'default',
 
 			'coupon_text_align'        => 'center',
-			'coupon_text_padding'      => 40,
+			'coupon_padding'           => 40,
 			'coupon_message'           => 'You have unlocked a {coupon_amount} coupon code',
 			'coupon_message_color'     => '',
 			'coupon_message_font_size' => '18',
@@ -278,14 +278,17 @@ Best Regards',
 			'my_account_coupon_enable' => '1',
 		);
 
-		$this->params = apply_filters( 'woo_thank_you_page_params', wp_parse_args( $woo_thank_you_page_settings, $this->default ) );
+		$params       = wp_parse_args( $woo_thank_you_page_settings, $this->default );
+		$params       = apply_filters( 'wtypc_thank_you_page_params', $params );
+		$this->params = apply_filters( 'woo_thank_you_page_params', $params ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 
 	public function get_params( $name = "" ) {
 		if ( ! $name ) {
 			return $this->params;
 		} elseif ( isset( $this->params[ $name ] ) ) {
-			return apply_filters( 'woo_thank_you_page_params' . $name, $this->params[ $name ] );
+			$value = apply_filters( 'wtypc_thank_you_page_params' . $name, $this->params[ $name ] );
+			return apply_filters( 'woo_thank_you_page_params' . $name, $value ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		} else {
 			return false;
 		}
@@ -295,7 +298,8 @@ Best Regards',
 		if ( ! $name ) {
 			return $this->default;
 		} elseif ( isset( $this->default[ $name ] ) ) {
-			return apply_filters( 'woo_thank_you_page_params_default' . $name, $this->default[ $name ] );
+			$value = apply_filters( 'wtypc_thank_you_page_params_default' . $name, $this->default[ $name ] );
+			return apply_filters( 'woo_thank_you_page_params_default' . $name, $value ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		} else {
 			return false;
 		}
@@ -312,4 +316,4 @@ Best Regards',
 	}
 }
 
-new VI_WOO_THANK_YOU_PAGE_DATA();
+new WTYPC_DATA();

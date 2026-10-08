@@ -1,8 +1,8 @@
-=== Thanko Thank You Page Customizer for WooCommerce - Increase Your Sales===
+=== Thanko Thank You Page Customizer for WooCommerce ===
 Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
-Requires at least: 5.0
+Requires at least: 5.2
 Tested up to: 7.1
 WC tested up to: 11.1
 Stable tag: trunk
@@ -230,6 +230,10 @@ in elements on Thank You page.
 2. Thank you page on frontend
 
 == Changelog ==
+
+2026.10.08 - version 1.2.4
+- Fixed: Escape order placeholder values before substituting into thank you page Text Editor and message content to prevent shortcode injection
+- Updated: Compatible WooCommerce 11.2
 
 2026.09.17 - version 1.2.3
 - Fixed: Prevent order customer data from being exposed on thank you page without a valid order key

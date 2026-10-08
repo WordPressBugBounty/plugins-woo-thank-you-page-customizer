@@ -20,10 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$data        = new VI_WOO_THANK_YOU_PAGE_DATA();
+// Template locals extracted by wc_get_template(). They are not plugin globals.
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
+$data        = new WTYPC_DATA();
 $blocks      = json_decode( $data->get_params( 'blocks' ) );
 $text_editor = json_decode( $data->get_params( 'text_editor' ), true );
-$wtypc       = new WTYPC_F_FUNCTIONS();
+$wtypc       = new WTYPC_Functions();
 $date_format = wc_date_format();
 
 if ( $order ) {
@@ -94,11 +97,12 @@ if ( $order ) {
 		$thank_you_message_message   = $data->get_params( 'thank_you_message_message' );
 		if ( is_array( $shortcodes ) && count( $shortcodes ) ) {
 			foreach ( $shortcodes as $key => $value ) {
-				$order_confirmation_header   = str_replace( "{{$key}}", $value, $order_confirmation_header );
-				$order_details_header        = str_replace( "{{$key}}", $value, $order_details_header );
-				$customer_information_header = str_replace( "{{$key}}", $value, $customer_information_header );
-				$thank_you_message_header    = str_replace( "{{$key}}", $value, $thank_you_message_header );
-				$thank_you_message_message   = str_replace( "{{$key}}", $value, $thank_you_message_message );
+				$safe_value                  = wp_kses_post( str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), (string) $value ) );
+				$order_confirmation_header   = str_replace( "{{$key}}", $safe_value, $order_confirmation_header );
+				$order_details_header        = str_replace( "{{$key}}", $safe_value, $order_details_header );
+				$customer_information_header = str_replace( "{{$key}}", $safe_value, $customer_information_header );
+				$thank_you_message_header    = str_replace( "{{$key}}", $safe_value, $thank_you_message_header );
+				$thank_you_message_message   = str_replace( "{{$key}}", $safe_value, $thank_you_message_message );
 			}
 		}
 		$text_editor_id   = 0;
@@ -331,7 +335,7 @@ if ( $order ) {
 																				$alt               = get_post_meta( $product->get_id(), '_wp_attachment_image_alt', true );
 																			}
 																			if ( $order_details_product_image && $product_image_src ) {
-																				echo wp_kses_post( apply_filters( 'woo_thank_you_page_order_item_image',
+																				echo wp_kses_post( apply_filters( 'woo_thank_you_page_order_item_image', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 																					$product_permalink ? sprintf( '<div><a href="%s" class="%s"><img class="%s" src="%s" alt="%s">%s</a></div>',
 																						$product_permalink, $data->set( 'order-item-image-wrap' ),
 																						$data->set( 'order-item-image' ),
@@ -680,7 +684,8 @@ if ( $order ) {
 															$tiktok_html = ob_get_clean();
 															$html         .= '<li class="wtyp-tiktok-follow">' . $tiktok_html . '</li>';
 														}
-														$html = apply_filters( 'wtyp_after_socials_html', $html );
+														$html = apply_filters( 'wtypc_after_socials_html', $html );
+														$html = apply_filters( 'wtyp_after_socials_html', $html ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 														$html .= '</ul></div>';
 														echo wp_kses_post( $html );
 														break;
@@ -694,7 +699,8 @@ if ( $order ) {
 															}
 															if ( is_array( $shortcodes ) && count( $shortcodes ) ) {
 																foreach ( $shortcodes as $key => $value ) {
-																	$text = str_replace( "{{$key}}", $value, $text );
+																	$safe_value = wp_kses_post( str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), (string) $value ) );
+																	$text       = str_replace( "{{$key}}", $safe_value, $text );
 																}
 															}
 															?>
@@ -767,7 +773,7 @@ if ( $order ) {
 														 * Feature use coupon of Email template and disable coupon thank you page
 														 *
 														 * */
-														$viwec_coupon_code = isset( $_COOKIE['viwec_coupon_code'] ) ? sanitize_text_field( $_COOKIE['viwec_coupon_code'] ) : '';
+														$viwec_coupon_code = isset( $_COOKIE['viwec_coupon_code'] ) ? sanitize_text_field( wp_unslash( $_COOKIE['viwec_coupon_code'] ) ) : '';
 														$is_viwec_active   = class_exists( 'WooCommerce_Email_Template_Customizer' );
 
 
@@ -818,7 +824,7 @@ if ( $order ) {
 																			wp_reset_postdata();
 																		} while ( $the_query->have_posts() );
 																		$coupon       = new WC_Coupon( $coupon_code );
-																		$today        = strtotime( date( 'Ymd' ) );// phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
+																		$today        = (int) current_time( 'timestamp' );
 																		$date_expires = ( $data->get_params( 'coupon_unique_date_expires' )[0] ) ? ( ( $data->get_params( 'coupon_unique_date_expires' )[0] + 1 ) * 86400 + $today ) : '';
 																		$coupon->set_amount( $data->get_params( 'coupon_unique_amount' )[0] );
 																		$coupon->set_date_expires( $date_expires );
@@ -845,7 +851,9 @@ if ( $order ) {
 																		$coupon->save();
 																		update_post_meta( $coupon->get_id(), 'wtypc_unique_coupon', $order->get_id() );
 																		$coupon_code = $coupon->get_code();
+																		break;
 																	default:
+																		break;
 																}
 
 																$order->update_meta_data( 'woo_thank_you_page_coupon_code', $coupon_code );
@@ -866,8 +874,11 @@ if ( $order ) {
 																	$coupon_amount = wc_price( $coupon->get_amount() );
 																}
 																$date_expires        = $coupon->get_date_expires();
-																$coupon_date_expires = empty( $date_expires ) ? esc_html__( 'never expires', 'woo-thank-you-page-customizer' ) : date_i18n( $date_format, strtotime( $date_expires ) );
-																$last_valid_date     = empty( $date_expires ) ? '' : date_i18n( $date_format, strtotime( $date_expires ) - 86400 );
+																$expires_ts          = ( $date_expires && is_object( $date_expires ) && method_exists( $date_expires, 'getTimestamp' ) )
+																	? (int) $date_expires->getTimestamp()
+																	: ( $date_expires ? strtotime( (string) $date_expires ) : 0 );
+																$coupon_date_expires = $expires_ts ? date_i18n( $date_format, $expires_ts ) : esc_html__( 'never expires', 'woo-thank-you-page-customizer' );
+																$last_valid_date     = $expires_ts ? date_i18n( $date_format, $expires_ts - 86400 ) : '';
 																$coupon_message      = str_replace( '{coupon_code}', $coupon_code, $coupon_message );
 																$coupon_message      = str_replace( '{coupon_amount}', $coupon_amount, $coupon_message );
 																$coupon_message      = str_replace( '{last_valid_date}', $last_valid_date, $coupon_message );
@@ -927,10 +938,7 @@ if ( $order ) {
 														break;
 													case 'order_again':
 														ob_start();
-														if ( function_exists( 'woocommerce_order_again_button' ) ) {
-															woocommerce_order_again_button( $order );
-														}
-
+														WTYPC_Functions::render_order_again_button( $order );
 														echo wp_kses_post( ob_get_clean() );
 														break;
 													default:

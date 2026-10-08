@@ -3,7 +3,7 @@
  * Plugin Name: Thanko Thank You Page Customizer for WooCommerce
  * Plugin URI: https://villatheme.com/extensions/woo-thank-you-page-customizer
  * Description: Craft a stunning thank you page effortlessly with our user-friendly customization tools, offer coupons to customers after purchase.
- * Version: 1.2.3
+ * Version: 1.2.4
  * Author: VillaTheme
  * Author URI: https://villatheme.com
  * License:     GPL v2 or later
@@ -13,7 +13,7 @@
  * Copyright 2018-2026 VillaTheme.com. All rights reserved.
  * Tested up to: 7.1
  * WC requires at least: 7.0
- * WC tested up to: 11.1
+ * WC tested up to: 11.2
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
  **/
@@ -21,16 +21,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'VI_WOO_THANK_YOU_PAGE_VERSION', '1.2.3' );
+define( 'WTYPC_VERSION', '1.2.4' );
+if ( ! defined( 'VI_WOO_THANK_YOU_PAGE_VERSION' ) ) {
+	define( 'VI_WOO_THANK_YOU_PAGE_VERSION', WTYPC_VERSION ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
+}
 /**
  * Detect plugin. For use on Front End only.
  */
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 /**
- * Class WOO_THANK_YOU_PAGE_CUSTOMIZER
+ * Class WTYPC_Plugin
  */
-class WOO_THANK_YOU_PAGE_CUSTOMIZER {
+class WTYPC_Plugin {
 	public function __construct() {
 		//compatible with 'High-Performance order storage (COT)'
 		add_action( 'before_woocommerce_init', array( $this, 'before_woocommerce_init' ) );
@@ -41,8 +44,8 @@ class WOO_THANK_YOU_PAGE_CUSTOMIZER {
 			return;
 		}
 		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-			$init_file = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . "woo-thank-you-page-customizer" . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . "define.php";
-			require_once $init_file;
+			$wtypc_init_file = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'woo-thank-you-page-customizer' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'define.php';
+			require_once $wtypc_init_file;
 		}
 		add_action( 'plugins_loaded', function () {
 			if ( ! class_exists( 'VillaTheme_Require_Environment' ) ) {
@@ -52,7 +55,7 @@ class WOO_THANK_YOU_PAGE_CUSTOMIZER {
 			$environment = new \VillaTheme_Require_Environment( [
 					'plugin_name'     => 'Thanko Thank You Page Customizer for WooCommerce',
 					'php_version'     => '7.4',
-					'wp_version'      => '5.0',
+					'wp_version'      => '5.2',
 					'require_plugins' => [
 						[
 							'slug' => 'woocommerce',
@@ -79,4 +82,7 @@ class WOO_THANK_YOU_PAGE_CUSTOMIZER {
 
 }
 
-new WOO_THANK_YOU_PAGE_CUSTOMIZER();
+new WTYPC_Plugin();
+if ( ! class_exists( 'WOO_THANK_YOU_PAGE_CUSTOMIZER', false ) ) {
+	class_alias( 'WTYPC_Plugin', 'WOO_THANK_YOU_PAGE_CUSTOMIZER' );
+}

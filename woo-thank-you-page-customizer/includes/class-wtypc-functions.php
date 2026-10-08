@@ -3,15 +3,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WTYPC_F_FUNCTIONS {
+class WTYPC_Functions {
 	public static $params;
 
 	/**
-	 * WTYPC_F_FUNCTIONS constructor.
+	 * WTYPC_Functions constructor.
 	 * Init setting
 	 */
 	public function __construct() {
-		self::$params = new VI_WOO_THANK_YOU_PAGE_DATA();
+		self::$params = new WTYPC_DATA();
 	}
 
 	public static function email_style( $css ) {
@@ -70,7 +70,7 @@ class WTYPC_F_FUNCTIONS {
 		}
 	}
 	public static function woocommerce_valid_order_statuses_for_order_again( $order_status ) {
-		self::$params = new VI_WOO_THANK_YOU_PAGE_DATA();
+		self::$params = new WTYPC_DATA();
 		$status = self::$params->get_params( 'order_status' );
 		if ( is_array( $status ) && count( $status ) ) {
 			$order_status = array();
@@ -81,4 +81,37 @@ class WTYPC_F_FUNCTIONS {
 
 		return $order_status;
 	}
+
+	/**
+	 * Render Order again button on thank you page.
+	 *
+	 * WooCommerce's woocommerce_order_again_button() returns early on
+	 * is_order_received_page(), so it never outputs there.
+	 *
+	 * @param WC_Order|false $order Order object.
+	 */
+	public static function render_order_again_button( $order ) {
+		$statuses_for_reordering = apply_filters( 'woocommerce_valid_order_statuses_for_order_again', array( 'completed' ) );
+		if ( ! $order || ! $order->has_status( $statuses_for_reordering ) || ! is_user_logged_in() ) {
+			return;
+		}
+
+		$wp_button_class = '';
+		if ( function_exists( 'wc_wp_theme_get_element_class_name' ) && wc_wp_theme_get_element_class_name( 'button' ) ) {
+			$wp_button_class = ' ' . wc_wp_theme_get_element_class_name( 'button' );
+		}
+
+		wc_get_template(
+			'order/order-again.php',
+			array(
+				'order'           => $order,
+				'wp_button_class' => $wp_button_class,
+				'order_again_url' => wp_nonce_url( add_query_arg( 'order_again', $order->get_id(), wc_get_cart_url() ), 'woocommerce-order_again' ),
+			)
+		);
+	}
+}
+
+if ( ! class_exists( 'WTYPC_F_FUNCTIONS', false ) ) {
+	class_alias( 'WTYPC_Functions', 'WTYPC_F_FUNCTIONS' );
 }

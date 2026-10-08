@@ -1,6 +1,6 @@
 <?php
 /*
-Class Name: VI_WOO_THANK_YOU_PAGE_Admin_Admin
+Class Name: WTYPC_Admin_Admin
 Author: Andy Ha (support@villatheme.com)
 Author URI: http://villatheme.com
 Copyright 2018 villatheme.com. All rights reserved.
@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class VI_WOO_THANK_YOU_PAGE_Admin_Design {
+class WTYPC_Admin_Design {
 	protected $settings;
 	protected $order_id;
 	protected $key;
@@ -18,7 +18,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 	protected $shortcodes;
 
 	public function __construct() {
-		$this->settings   = new VI_WOO_THANK_YOU_PAGE_DATA();
+		$this->settings   = new WTYPC_DATA();
 		$this->prefix     = 'woocommerce-thank-you-page-';
 		$this->shortcodes = array(
 			'order_number'   => '',
@@ -51,7 +51,6 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 		add_action( 'customize_register', array( $this, 'design_option_customizer' ) );
 		add_action( 'wp_print_styles', array( $this, 'customize_controls_print_styles' ) );
 		add_action( 'customize_preview_init', array( $this, 'customize_preview_init' ) );
-		add_action( 'customize_controls_print_scripts', array( $this, 'customize_controls_print_scripts' ), 99 );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customize_controls_enqueue_scripts' ), 30 );
 		add_action( 'wp_ajax_woo_thank_you_page_get_available_shortcodes', array( $this, 'get_available_shortcodes' ) );
 	}
@@ -253,23 +252,37 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 
 	public function customize_controls_enqueue_scripts() {
 		$src_min = WP_DEBUG ? '' : '.min';
-		wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'social_icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-		wp_enqueue_style( 'woocommerce-thank-you-page-available-components-icons', VI_WOO_THANK_YOU_PAGE_CSS . 'available-components-icons' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
-		wp_enqueue_style( 'woocommerce-thank-you-page-customize-preview-style', VI_WOO_THANK_YOU_PAGE_CSS . 'customize-preview' . $src_min . '.css', array(), VI_WOO_THANK_YOU_PAGE_VERSION );
+		wp_enqueue_style( 'woocommerce-thank-you-page-social-icons', WTYPC_CSS . 'social_icons' . $src_min . '.css', array(), WTYPC_VERSION );
+		wp_enqueue_style( 'woocommerce-thank-you-page-available-components-icons', WTYPC_CSS . 'available-components-icons' . $src_min . '.css', array(), WTYPC_VERSION );
+		wp_enqueue_style( 'woocommerce-thank-you-page-customize-preview-style', WTYPC_CSS . 'customize-preview' . $src_min . '.css', array(), WTYPC_VERSION );
+		wp_enqueue_script(
+			'woocommerce-thank-you-page-customize',
+			WTYPC_JS . 'customize-settings.js',
+			array( 'jquery', 'customize-controls' ),
+			WTYPC_VERSION,
+			true
+		);
+		wp_localize_script(
+			'woocommerce-thank-you-page-customize',
+			'woocommerce_thank_you_page_custom_control_params',
+			array(
+				'url'               => admin_url( 'admin-ajax.php' ),
+				'customizer_nonce'  => wp_create_nonce( 'viwtp_ajax_customizer_nonce' ),
+			)
+		);
 	}
-
 
 	public function customize_preview_init() {
 		if ( isset( $_REQUEST['key'] ) ) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$this->key      = wc_clean( $_REQUEST['key'] );// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$this->key      = sanitize_text_field( wp_unslash( $_REQUEST['key'] ) );// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$this->order_id = wc_get_order_id_by_order_key( $this->key );
 		}
 		$src_min = WP_DEBUG ? '' : '.min';
-		wp_enqueue_script( 'woocommerce-thank-you-page-customize-preview-js', VI_WOO_THANK_YOU_PAGE_JS . 'customize-preview' . $src_min . '.js', array(
+		wp_enqueue_script( 'woocommerce-thank-you-page-customize-preview-js', WTYPC_JS . 'customize-preview' . $src_min . '.js', array(
 			'jquery',
 			'customize-preview',
 			'select2',
-		), VI_WOO_THANK_YOU_PAGE_VERSION, true );
+		), WTYPC_VERSION, true );
 		$order              = wc_get_order( $this->order_id );
 		$google_map_address = $this->get_params( 'google_map_address' );
 		$date_format = wc_date_format();
@@ -347,133 +360,13 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 				$this->shortcodes['billing_address']
 			), $this->get_params( 'google_map_label' ) ),
 			'google_map_api'    => $this->get_params( 'google_map_api' ),
-			'google_map_marker' => VI_WOO_THANK_YOU_PAGE_MARKERS . $this->get_params( 'google_map_marker' ) . '.png',
+			'google_map_marker' => WTYPC_MARKERS . $this->get_params( 'google_map_marker' ) . '.png',
 			'shortcodes'        => $this->shortcodes,
-			'markers_url'       => VI_WOO_THANK_YOU_PAGE_MARKERS,
+			'markers_url'       => WTYPC_MARKERS,
 			'ajax_nonce'        => wp_create_nonce( 'viwtp_ajax_nonce' ),
 		) );
 	}
 
-	public function customize_controls_print_scripts() {
-		if ( ! is_customize_preview() ) {
-			return;
-		}
-		$customizer_nonce = wp_create_nonce( 'viwtp_ajax_customizer_nonce' );
-
-		?>
-        <script type="text/javascript">
-			const viwtp_ajax_customizer_nonce = "<?php echo $customizer_nonce; ?>";
-            if (typeof wp.customize !== 'undefined') {
-                viwtypc_design_init();
-            }
-			console.log("Running 2");
-            jQuery(document).ready(function () {
-                viwtypc_design_init();
-            });
-
-
-            function viwtypc_design_init() {
-                wp.customize.bind('ready', function () {
-                    let submenu = [
-                        'thank_you_message',
-                        'order_confirmation',
-                        'order_details',
-                        'customer_information',
-                        'coupon',
-                        'social_icons',
-                        'google_map',
-                        'order_again',
-                    ];
-                    jQuery('.customize-section-back').on('click', function () {
-                        let id = jQuery(this).parent().parent().parent().prop('id').replace('sub-accordion-section-woo_thank_you_page_design_', '');
-                        if (submenu.indexOf(id) > -1) {
-                            wp.customize.section('woo_thank_you_page_design_general').expanded(true);
-                        }
-                    });
-                    jQuery('.woocommerce-thank-you-page-available-shortcodes-shortcut').on('click', function () {
-                        wp.customize.previewer.send('wtyp_shortcut_to_available_shortcodes', 'show');
-                    });
-                    wp.customize.previewer.bind('wtyp_open_latest_added_item', function (message) {
-                        jQuery('.woocommerce-thank-you-page-latest-item').find('.woocommerce-thank-you-page-edit').click();
-                        jQuery('.woocommerce-thank-you-page-item').removeClass('woocommerce-thank-you-page-latest-item');
-                    });
-                    wp.customize.previewer.bind('wtyp_update_text_editor', function (message) {
-                        wp.customize('woo_thank_you_page_params[text_editor]').set(message);
-                    });
-
-                    wp.customize.previewer.bind('wtyp_handle_overlay_processing', function (message) {
-                        if (message === 'show') {
-                            jQuery('.woocommerce-thank-you-page-control-processing').show();
-                        } else {
-                            jQuery('.woocommerce-thank-you-page-control-processing').hide();
-                        }
-                    });
-                    wp.customize.previewer.bind('wtyp_update_url', function (message) {
-                        location.href = message;
-                    });
-                    wp.customize.previewer.bind('wtyp_shortcut_edit', function (message) {
-                        wp.customize.section('woo_thank_you_page_design_' + message).expanded(true);
-                    });
-                    for (let i in submenu) {
-                        focus_on_editing_item_send(submenu[i]);
-                    }
-
-                    function focus_on_editing_item_send(name) {
-                        wp.customize.section('woo_thank_you_page_design_' + name, function (section) {
-                            section.expanded.bind(function (isExpanded) {
-                                if (isExpanded) {
-                                    wp.customize.previewer.send('wtyp_focus_on_editing_item', 'woocommerce-thank-you-page-' + name + '__container');
-                                }
-                            })
-                        });
-                    }
-
-                    wp.customize.section('woo_thank_you_page_design_general', function (section) {
-                        section.expanded.bind(function (isExpanded) {
-                            if (isExpanded) {
-                                jQuery.ajax({
-                                    type: 'POST',
-                                    dataType: 'json',
-                                    url: '<?php echo esc_url_raw( admin_url( 'admin-ajax.php' ) );?>',
-                                    data: {
-                                        action: 'woo_thank_you_page_select_order',
-                                        order_id: wp.customize('woo_thank_you_page_params[select_order]').get(),
-										_ajax_nonce: viwtp_ajax_customizer_nonce
-                                    },
-                                    success: function (response) {
-                                        if (response && response.hasOwnProperty('url') && response.url) {
-                                            wp.customize.previewer.send('wtyp_update_url', response.url);
-                                        }
-                                    },
-                                    error: function (err) {
-                                        console.log(err);
-                                    }
-                                })
-                            } else {
-                            }
-                        })
-                    });
-                    /*edit item*/
-                    jQuery('body').on('click', '.woocommerce-thank-you-page-container__block .woocommerce-thank-you-page-edit', function (event) {
-                        event.stopPropagation();
-                        let parent = jQuery(this).parent();
-                        let item = parent.data()['block_item'];
-                        if (item == 'text_editor') {
-                            let position = jQuery('.woocommerce-thank-you-page-container__block .woocommerce-thank-you-page-' + item).index(parent);
-                            wp.customize.previewer.send('wtyp_shortcut_edit_' + item + '_from_section', position);
-                        } else {
-                            wp.customize.previewer.send('wtyp_shortcut_edit_item_from_section', 'woocommerce-thank-you-page-edit-item-shortcut[data-edit_section="' + item + '"]');
-                        }
-                    });
-                    jQuery('.wtyp-button-update-changes-google-map').on('click', function () {
-                        let address = wp.customize('woo_thank_you_page_params[google_map_address]').get();
-                        wp.customize.previewer.send('wtyp_update_google_map_address', address);
-                    });
-                });
-            }
-        </script>
-		<?php
-	}
 
 	public function design_option_customizer( $wp_customize ) {
 		$this->add_section_design_general( $wp_customize );
@@ -580,12 +473,12 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'default'              => $this->settings->get_default( 'blocks' ),
 			'type'                 => 'option',
 			'capability'           => 'manage_options',
-			'sanitize_callback'    => 'wtyp_sanitize_block',
-			'sanitize_js_callback' => 'wtyp_sanitize_block',
+			'sanitize_callback'    => 'wtypc_sanitize_block',
+			'sanitize_js_callback' => 'wtypc_sanitize_block',
 			'transport'            => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Blocks_Control(
+			new WTYPC_Blocks_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[blocks]',
 				array(
@@ -599,12 +492,12 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'default'              => $this->settings->get_default( 'text_editor' ),
 			'type'                 => 'option',
 			'capability'           => 'manage_options',
-			'sanitize_callback'    => 'wtyp_sanitize_block',
-			'sanitize_js_callback' => 'wtyp_sanitize_block',
+			'sanitize_callback'    => 'wtypc_sanitize_block',
+			'sanitize_js_callback' => 'wtypc_sanitize_block',
 			'transport'            => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Text_Editor_Control(
+			new WTYPC_Text_Editor_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[text_editor]',
 				array(
@@ -2292,7 +2185,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_facebook_select]',
 				array(
@@ -2345,7 +2238,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_twitter_select]',
 				array(
@@ -2396,7 +2289,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_pinterest_select]',
 				array(
@@ -2447,7 +2340,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_instagram_select]',
 				array(
@@ -2498,7 +2391,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_dribbble_select]',
 				array(
@@ -2549,7 +2442,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_tumblr_select]',
 				array(
@@ -2600,7 +2493,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_google_select]',
 				array(
@@ -2651,7 +2544,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_vkontakte_select]',
 				array(
@@ -2701,7 +2594,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_linkedin_select]',
 				array(
@@ -2750,7 +2643,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_youtube_select]',
 				array(
@@ -2799,7 +2692,7 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 			'transport'         => 'postMessage',
 		) );
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Radio_Icons_Control(
+			new WTYPC_Radio_Icons_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[social_icons_tiktok_select]',
 				array(
@@ -2883,110 +2776,110 @@ class VI_WOO_THANK_YOU_PAGE_Admin_Design {
 		for ( $i = 1; $i <= 12; $i ++ ) {
 			$google_map_marker_choices[ 'if-marker-' . $i ] = array(
 				'name'  => esc_html( 'Marker ' . $i ),
-				'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'if-marker-' . $i . '.png'
+				'image' => WTYPC_MARKERS . 'if-marker-' . $i . '.png'
 			);
 		}
 		$google_map_marker_choices['blue']         = array(
 			'name'  => esc_html__( 'Blue', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'blue.png'
+			'image' => WTYPC_MARKERS . 'blue.png'
 		);
 		$google_map_marker_choices['blue-dot']     = array(
 			'name'  => esc_html__( 'Blue dot', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'blue-dot.png'
+			'image' => WTYPC_MARKERS . 'blue-dot.png'
 		);
 		$google_map_marker_choices['blue-pushpin'] = array(
 			'name'  => esc_html__( 'Blue pushpin', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'blue-pushpin.png'
+			'image' => WTYPC_MARKERS . 'blue-pushpin.png'
 		);
 
 		$google_map_marker_choices['yellow']         = array(
 			'name'  => esc_html__( 'Yellow', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'yellow.png'
+			'image' => WTYPC_MARKERS . 'yellow.png'
 		);
 		$google_map_marker_choices['yellow-dot']     = array(
 			'name'  => esc_html__( 'Yellow dot', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'yellow-dot.png'
+			'image' => WTYPC_MARKERS . 'yellow-dot.png'
 		);
 		$google_map_marker_choices['yellow-pushpin'] = array(
 			'name'  => esc_html__( 'Yellow pushpin', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'yellow-pushpin.png'
+			'image' => WTYPC_MARKERS . 'yellow-pushpin.png'
 		);
 
 
 		$google_map_marker_choices['green']         = array(
 			'name'  => esc_html__( 'Green', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'green.png'
+			'image' => WTYPC_MARKERS . 'green.png'
 		);
 		$google_map_marker_choices['green-dot']     = array(
 			'name'  => esc_html__( 'Green dot', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'green-dot.png'
+			'image' => WTYPC_MARKERS . 'green-dot.png'
 		);
 		$google_map_marker_choices['green-pushpin'] = array(
 			'name'  => esc_html__( 'Green pushpin', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'green-pushpin.png'
+			'image' => WTYPC_MARKERS . 'green-pushpin.png'
 		);
 
 
 		$google_map_marker_choices['orange']     = array(
 			'name'  => esc_html__( 'Orange', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'orange.png'
+			'image' => WTYPC_MARKERS . 'orange.png'
 		);
 		$google_map_marker_choices['orange-dot'] = array(
 			'name'  => esc_html__( 'Orange dot', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'orange-dot.png'
+			'image' => WTYPC_MARKERS . 'orange-dot.png'
 		);
 
 
 		$google_map_marker_choices['pink']         = array(
 			'name'  => esc_html__( 'Pink', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'pink.png'
+			'image' => WTYPC_MARKERS . 'pink.png'
 		);
 		$google_map_marker_choices['pink-dot']     = array(
 			'name'  => esc_html__( 'Pink dot', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'pink-dot.png'
+			'image' => WTYPC_MARKERS . 'pink-dot.png'
 		);
 		$google_map_marker_choices['pink-pushpin'] = array(
 			'name'  => esc_html__( 'Pink pushpin', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'pink-pushpin.png'
+			'image' => WTYPC_MARKERS . 'pink-pushpin.png'
 		);
 
 
 		$google_map_marker_choices['purple']         = array(
 			'name'  => esc_html__( 'Purple', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'purple.png'
+			'image' => WTYPC_MARKERS . 'purple.png'
 		);
 		$google_map_marker_choices['purple-dot']     = array(
 			'name'  => esc_html__( 'Purple dot', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'purple-dot.png'
+			'image' => WTYPC_MARKERS . 'purple-dot.png'
 		);
 		$google_map_marker_choices['purple-pushpin'] = array(
 			'name'  => esc_html__( 'Purple pushpin', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'purple-pushpin.png'
+			'image' => WTYPC_MARKERS . 'purple-pushpin.png'
 		);
 
 
 		$google_map_marker_choices['red']         = array(
 			'name'  => esc_html__( 'Red', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'red.png'
+			'image' => WTYPC_MARKERS . 'red.png'
 		);
 		$google_map_marker_choices['red-dot']     = array(
 			'name'  => esc_html__( 'Red', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'red-dot.png'
+			'image' => WTYPC_MARKERS . 'red-dot.png'
 		);
 		$google_map_marker_choices['red-pushpin'] = array(
 			'name'  => esc_html__( 'Red pushpin', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'red-pushpin.png'
+			'image' => WTYPC_MARKERS . 'red-pushpin.png'
 		);
 
 
 		$google_map_marker_choices['default'] = array(
 
 			'name'  => esc_html__( 'Default', 'woo-thank-you-page-customizer' ),
-			'image' => VI_WOO_THANK_YOU_PAGE_MARKERS . 'default.png'
+			'image' => WTYPC_MARKERS . 'default.png'
 		);
 
 		$wp_customize->add_control(
-			new WOO_THANK_YOU_PAGE_CUSTOMIZER_Image_Radio_Button_Custom_Control(
+			new WTYPC_Image_Radio_Button_Custom_Control(
 				$wp_customize,
 				'woo_thank_you_page_params[google_map_marker]',
 				array(
