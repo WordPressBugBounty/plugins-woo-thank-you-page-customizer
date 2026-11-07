@@ -180,7 +180,7 @@ class WTYPC_Admin_Settings {
 			'posts_per_page' => 50,
 			's'              => $keyword,
 			'meta_query'     => array(// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				'ralation' => 'AND',
+				'relation' => 'AND',
 				array(
 					'key'     => 'wtypc_unique_coupon',
 					'compare' => 'NOT EXISTS'

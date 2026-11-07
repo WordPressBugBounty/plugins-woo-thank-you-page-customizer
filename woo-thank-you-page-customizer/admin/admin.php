@@ -43,7 +43,7 @@ class WTYPC_Admin_Admin {
 		if ( ! get_option( 'woocommerce_checkout_page_id' ) ) {
 			?>
             <div id="message" class="error">
-                <p><?php wp_kses_post( 'Checkout page is not set yet, Thank You Page Customizer for WooCommerce is not working. Please set it <a target="_blank" href="' . admin_url( 'admin.php' ) . '?page=wc-settings&tab=advanced">here</a>.' ); ?></p>
+                <p><?php echo wp_kses_post( 'Checkout page is not set yet, Thank You Page Customizer for WooCommerce is not working. Please set it <a target="_blank" href="' . admin_url( 'admin.php' ) . '?page=wc-settings&tab=advanced">here</a>.' ); ?></p>
             </div>
 			<?php
 		}

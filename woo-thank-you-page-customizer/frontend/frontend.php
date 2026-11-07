@@ -471,6 +471,9 @@ class WTYPC_Frontend_Frontend {
 				$block_raw                   = isset( $_POST['block'] ) ? wp_unslash( $_POST['block'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$text_editor_raw             = isset( $_POST['text_editor'] ) ? wp_unslash( $_POST['text_editor'] ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$blocks                      = is_string( $block_raw ) && $block_raw !== '' ? json_decode( $block_raw ) : array();
+				if ( ! is_array( $blocks ) ) {
+					$blocks = array();
+				}
 				$text_editor                 = is_string( $text_editor_raw ) && $text_editor_raw !== '' ? json_decode( $text_editor_raw, true ) : array();
 				if ( ! is_array( $text_editor ) ) {
 					$text_editor = array();
@@ -542,6 +545,9 @@ class WTYPC_Frontend_Frontend {
 		}
 
 		$blocks = json_decode( $this->get_params( 'blocks' ), true );
+		if ( ! is_array( $blocks ) ) {
+			$blocks = array();
+		}
 		array_walk_recursive( $blocks, array( $this, 'get_active_components' ) );
 
 		$date_format = wc_date_format();
@@ -1501,6 +1507,9 @@ class WTYPC_Frontend_Frontend {
 			return $content;
 		}
 		$blocks      = json_decode( $this->get_params( 'blocks' ) );
+		if ( ! is_array( $blocks ) ) {
+			$blocks = array();
+		}
 		$text_editor = json_decode( $this->get_params( 'text_editor' ), true );
 		$meta        = array(
 			'order_confirmation_header'               => $this->get_params( 'order_confirmation_header' ),

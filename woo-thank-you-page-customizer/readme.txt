@@ -4,7 +4,7 @@ Donate link: http://www.villatheme.com/donate
 Tags: woocommerce thank you page, wc custom thank you, woocommerce thank you page customizer, woocommerce thank you page coupon, custom thank you page for woocommerce
 Requires at least: 5.2
 Tested up to: 7.1
-WC tested up to: 11.1
+WC tested up to: 11.2
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -230,6 +230,14 @@ in elements on Thank You page.
 2. Thank you page on frontend
 
 == Changelog ==
+
+2026.11.06 - version 1.2.5
+- Fixed: Echo checkout-page missing admin notice so merchants see the settings link
+- Fixed: Coupon search meta_query relation key so unique coupons stay excluded
+- Fixed: Guard thank-you blocks JSON decode before recursive walks on PHP 8+
+- Fixed: Use WooCommerce coupon code lookup instead of unbounded coupon title queries
+- Updated: Load plugin.php only when is_plugin_active is undefined
+- Updated: Compatible WooCommerce 11.2
 
 2026.10.08 - version 1.2.4
 - Fixed: Escape order placeholder values before substituting into thank you page Text Editor and message content to prevent shortcode injection

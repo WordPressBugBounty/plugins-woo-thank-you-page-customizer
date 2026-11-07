@@ -25,6 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $data        = new WTYPC_DATA();
 $blocks      = json_decode( $data->get_params( 'blocks' ) );
+if ( ! is_array( $blocks ) ) {
+	$blocks = array();
+}
 $text_editor = json_decode( $data->get_params( 'text_editor' ), true );
 $wtypc       = new WTYPC_Functions();
 $date_format = wc_date_format();
@@ -806,23 +809,18 @@ if ( $order ) {
 																		$coupon_code = $coupon->get_code();
 																		break;
 																	case 'unique':
-																		$coupon_code      = $data->get_params( 'coupon_unique_prefix' )[0];
+																		$coupon_prefix    = $data->get_params( 'coupon_unique_prefix' )[0];
 																		$characters_array = array_merge( range( 0, 9 ), range( 'a', 'z' ) );
 																		do {
+																			$coupon_code = $coupon_prefix;
 																			for ( $i = 0; $i < 6; $i ++ ) {
 																				$rand        = wp_rand( 0, count( $characters_array ) - 1 );
 																				$coupon_code .= $characters_array[ $rand ];
 																			}
-
-																			$args      = array(
-																				'post_type'      => 'shop_coupon',
-																				'post_status'    => 'publish',
-																				'posts_per_page' => - 1,
-																				'title'          => $coupon_code
-																			);
-																			$the_query = new WP_Query( $args );
-																			wp_reset_postdata();
-																		} while ( $the_query->have_posts() );
+																			$coupon_exists = function_exists( 'wc_get_coupon_id_by_code' )
+																				? (int) wc_get_coupon_id_by_code( $coupon_code )
+																				: 0;
+																		} while ( $coupon_exists );
 																		$coupon       = new WC_Coupon( $coupon_code );
 																		$today        = (int) current_time( 'timestamp' );
 																		$date_expires = ( $data->get_params( 'coupon_unique_date_expires' )[0] ) ? ( ( $data->get_params( 'coupon_unique_date_expires' )[0] + 1 ) * 86400 + $today ) : '';
