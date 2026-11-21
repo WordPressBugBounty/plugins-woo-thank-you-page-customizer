@@ -231,6 +231,11 @@ in elements on Thank You page.
 
 == Changelog ==
 
+2026.11.21 - version 1.2.6
+- Added: Order status for coupon setting so the thank-you gift is issued only for selected statuses, separate from the page display statuses
+- Fixed: Disable unique thank-you coupons when the order is cancelled, refunded, or failed (coupon kept; order display meta cleared)
+- Updated: Coupon order status default is completed only; cancelled, refunded, failed, and checkout draft cannot be used to issue coupons
+
 2026.11.06 - version 1.2.5
 - Fixed: Echo checkout-page missing admin notice so merchants see the settings link
 - Fixed: Coupon search meta_query relation key so unique coupons stay excluded

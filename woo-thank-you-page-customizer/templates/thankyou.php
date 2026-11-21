@@ -770,6 +770,23 @@ if ( $order ) {
 														$give_coupon = false;
 														$send_email = false;
 														$coupon_code = '';
+														$coupon_order_status = $data->get_params( 'coupon_order_status' );
+														if ( ! is_array( $coupon_order_status ) ) {
+															$coupon_order_status = array();
+														}
+														$coupon_status_ok = ! empty( $coupon_order_status )
+															&& in_array( 'wc-' . $order->get_status(), $coupon_order_status, true );
+														$coupon_status_ok = (bool) apply_filters(
+															'wtypc_coupon_order_status_eligible',
+															$coupon_status_ok,
+															$order,
+															$coupon_order_status
+														);
+														do_action( 'wtypc_coupon_order_status_checked', $coupon_status_ok, $order, $coupon_order_status );
+
+														if ( ! $coupon_status_ok ) {
+															break;
+														}
 
 														/*
 														 * 15-06-2022

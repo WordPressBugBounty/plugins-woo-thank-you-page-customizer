@@ -14,6 +14,7 @@ class WTYPC_Frontend_Account {
 
 	public function __construct() {
 		$this->settings = new WTYPC_DATA();
+		add_action( 'woocommerce_order_status_changed', array( $this, 'revoke_coupon_on_terminal_status' ), 10, 4 );
 		if ( $this->settings->get_params( 'my_account_coupon_enable' ) ) {
 			add_filter( 'woocommerce_account_orders_columns', array( $this, 'woocommerce_account_orders_columns' ) );
 			add_action( 'woocommerce_my_account_my_orders_column_wtypc_coupon', array(
@@ -21,6 +22,59 @@ class WTYPC_Frontend_Account {
 				'woocommerce_my_account_my_orders_column_wtypc_coupon'
 			) );
 		}
+	}
+
+	/**
+	 * Disable thank-you unique coupon when the order reaches a terminal status.
+	 *
+	 * @param int            $order_id   Order ID.
+	 * @param string         $old_status Previous status slug.
+	 * @param string         $new_status New status slug.
+	 * @param WC_Order|false $order      Order object.
+	 */
+	public function revoke_coupon_on_terminal_status( $order_id, $old_status, $new_status, $order ) {
+		$terminal = array( 'cancelled', 'refunded', 'failed' );
+		if ( ! in_array( $new_status, $terminal, true ) ) {
+			return;
+		}
+
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			$order = wc_get_order( $order_id );
+		}
+		if ( ! $order ) {
+			return;
+		}
+
+		$should_revoke = apply_filters( 'wtypc_should_revoke_terminal_coupon', true, $order, $new_status, $old_status );
+		if ( ! $should_revoke ) {
+			return;
+		}
+
+		$disabled    = false;
+		$coupon_code = $order->get_meta( 'woo_thank_you_page_coupon_code', true );
+		if ( $coupon_code ) {
+			$coupon = new WC_Coupon( $coupon_code );
+			if ( $coupon->get_id() ) {
+				$linked_order_id = absint( $coupon->get_meta( 'wtypc_unique_coupon' ) );
+				if ( $linked_order_id && $linked_order_id === absint( $order->get_id() ) ) {
+					$usage_count = absint( $coupon->get_usage_count() );
+					if ( 0 === $usage_count ) {
+						// WC treats usage_limit 0 as unlimited; expire unused coupons instead.
+						$coupon->set_date_expires( time() - DAY_IN_SECONDS );
+					} else {
+						$coupon->set_usage_limit( $usage_count );
+					}
+					$coupon = apply_filters( 'wtypc_revoke_terminal_coupon', $coupon, $order, $new_status );
+					$coupon->save();
+					$disabled = true;
+				}
+			}
+		}
+
+		$order->update_meta_data( 'woo_thank_you_page_coupon_code', '' );
+		$order->save();
+
+		do_action( 'wtypc_revoked_terminal_coupon', $order, $new_status, $disabled, $old_status );
 	}
 
 	public function woocommerce_my_account_my_orders_column_wtypc_coupon( $order ) {

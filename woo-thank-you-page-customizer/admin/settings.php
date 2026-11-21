@@ -529,6 +529,33 @@ class WTYPC_Admin_Settings {
                             </tr>
                             <tr valign="top">
                                 <th scope="row">
+                                    <label for="coupon_order_status"><?php esc_html_e( 'Order status for coupon', 'woo-thank-you-page-customizer' ) ?></label>
+                                </th>
+                                <td>
+                                    <select name="coupon_order_status[]" id="coupon_order_status"
+                                            class="vi-ui fluid dropdown selection" multiple="">
+										<?php
+										$coupon_order_status = $this->settings->get_params( 'coupon_order_status' );
+										if ( ! is_array( $coupon_order_status ) ) {
+											$coupon_order_status = array();
+										}
+										$banned   = $this->settings->get_coupon_order_status_banned();
+										$statuses = wc_get_order_statuses();
+										foreach ( $statuses as $k => $status ) {
+											if ( in_array( $k, $banned, true ) ) {
+												continue;
+											}
+											?>
+                                            <option value="<?php echo esc_attr( $k ); ?>" <?php selected( in_array( $k, $coupon_order_status, true ) ); ?>><?php echo esc_html( $status ); ?></option>
+											<?php
+										}
+										?>
+                                    </select>
+                                    <p class="description"><?php esc_html_e( 'Give the coupon gift only when the order status matches one of these values. Cancelled, refunded, failed, and checkout draft are never available here (they conflict with coupon revoke). This is separate from the General “Order status” option that controls when the custom thank you page is shown.', 'woo-thank-you-page-customizer' ) ?></p>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <th scope="row">
                                     <label for="coupon_type"><?php esc_html_e( 'Select coupon', 'woo-thank-you-page-customizer' ) ?></label>
                                 </th>
                                 <td>
@@ -1076,13 +1103,17 @@ class WTYPC_Admin_Settings {
 		$args['my_account_coupon_enable'] = isset( $_POST['my_account_coupon_enable'] ) ? sanitize_text_field( wp_unslash( $_POST['my_account_coupon_enable'] ) ) : '';
 		$args['google_map_api']           = isset( $_POST['google_map_api'] ) ? sanitize_text_field( wp_unslash( $_POST['google_map_api'] ) ) : '';
 		$args['order_status']             = isset( $_POST['order_status'] ) ? map_deep( wp_unslash( $_POST['order_status'] ), 'sanitize_text_field' ) : array();
+		$args['coupon_order_status']      = isset( $_POST['coupon_order_status'] ) ? map_deep( wp_unslash( $_POST['coupon_order_status'] ), 'sanitize_text_field' ) : array();
+		$args['coupon_order_status']      = $this->settings->sanitize_coupon_order_status( $args['coupon_order_status'] );
 		$args['coupon_email_send']        = isset( $_POST['coupon_email_send'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_email_send'] ) ) : '';
 		$args['coupon_email_subject']     = isset( $_POST['coupon_email_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_email_subject'] ) ) : '';
 		$args['coupon_email_heading']     = isset( $_POST['coupon_email_heading'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_email_heading'] ) ) : '';
 		$args['coupon_email_content']     = isset( $_POST['coupon_email_content'] ) ? wp_kses_post( wp_unslash( $_POST['coupon_email_content'] ) ) : '';
 		$args['products']                 = wp_json_encode( array() );
 		$args                             = wp_parse_args( $args, get_option( 'woo_thank_you_page_params', $woo_thank_you_page_settings ) );
+		$args                             = apply_filters( 'wtypc_save_data_args', $args );
 		update_option( 'woo_thank_you_page_params', $args );
 		$woo_thank_you_page_settings = $args; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+		do_action( 'wtypc_saved_data', $args );
 	}
 }

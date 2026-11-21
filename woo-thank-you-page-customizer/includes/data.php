@@ -29,6 +29,9 @@ class WTYPC_DATA {
 				'wc-pending',
 				'wc-on-hold',
 			),
+			'coupon_order_status'                  => array(
+				'wc-completed',
+			),
 			'blocks'                               => wp_json_encode(
 				array(
 					array(
@@ -278,16 +281,66 @@ Best Regards',
 			'my_account_coupon_enable' => '1',
 		);
 
-		$params       = wp_parse_args( $woo_thank_you_page_settings, $this->default );
+		$params = wp_parse_args( $woo_thank_you_page_settings, $this->default );
+		if ( isset( $params['coupon_order_status'] ) ) {
+			$params['coupon_order_status'] = $this->sanitize_coupon_order_status( $params['coupon_order_status'] );
+		}
 		$params       = apply_filters( 'wtypc_thank_you_page_params', $params );
 		$this->params = apply_filters( 'woo_thank_you_page_params', $params ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+	}
+
+	/**
+	 * Order status slugs that must never gate coupon mint/show.
+	 *
+	 * @return array
+	 */
+	public function get_coupon_order_status_banned() {
+		$banned = array(
+			'wc-cancelled',
+			'wc-refunded',
+			'wc-failed',
+			'wc-checkout-draft',
+		);
+		$banned = apply_filters( 'wtypc_coupon_order_status_banned', $banned );
+		do_action( 'wtypc_coupon_order_status_banned_resolved', $banned );
+
+		return is_array( $banned ) ? $banned : array();
+	}
+
+	/**
+	 * Remove banned statuses from a coupon order status list.
+	 *
+	 * @param mixed $list Status slugs.
+	 * @return array
+	 */
+	public function sanitize_coupon_order_status( $list ) {
+		if ( ! is_array( $list ) ) {
+			$list = array();
+		}
+		$banned = $this->get_coupon_order_status_banned();
+		$list   = array_values(
+			array_filter(
+				$list,
+				static function ( $status ) use ( $banned ) {
+					return is_string( $status ) && '' !== $status && ! in_array( $status, $banned, true );
+				}
+			)
+		);
+		$list = apply_filters( 'wtypc_sanitize_coupon_order_status', $list, $banned );
+		do_action( 'wtypc_sanitized_coupon_order_status', $list, $banned );
+
+		return is_array( $list ) ? $list : array();
 	}
 
 	public function get_params( $name = "" ) {
 		if ( ! $name ) {
 			return $this->params;
 		} elseif ( isset( $this->params[ $name ] ) ) {
-			$value = apply_filters( 'wtypc_thank_you_page_params' . $name, $this->params[ $name ] );
+			$value = $this->params[ $name ];
+			if ( 'coupon_order_status' === $name ) {
+				$value = $this->sanitize_coupon_order_status( $value );
+			}
+			$value = apply_filters( 'wtypc_thank_you_page_params' . $name, $value );
 			return apply_filters( 'woo_thank_you_page_params' . $name, $value ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		} else {
 			return false;
